@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev": "concurrently \"vite\" \"json-server --watch db.json --port 3000\"",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"start:render": "json-server db.json --port ${PORT:-3000} --host 0.0.0.0",
+		"start": "pnpm run start:render"
 	},
 	"dependencies": {
 		"@tanstack/vue-query": "^5.96.2",
