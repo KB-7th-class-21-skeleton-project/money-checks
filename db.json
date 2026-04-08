@@ -27,6 +27,7 @@
 			"category": "카페",
 			"amount": 5500,
 			"type": "out",
+			"content": "스타벅스",
 			"memo": "팀원들이랑 커피 한 잔"
 		},
 		{
@@ -37,6 +38,7 @@
 			"category": "식비",
 			"amount": 25000,
 			"type": "out",
+			"content": "몰라치킨",
 			"memo": "저녁은 치킨!"
 		},
 		{
@@ -47,6 +49,7 @@
 			"amount": 1556,
 			"type": "out",
 			"memo": "API 연동 테스트입니다.",
+			"content": "몰라",
 			"id": "UJTv3hF9o8Y"
 		},
 		{
@@ -57,7 +60,8 @@
 			"amount": 2670,
 			"type": "out",
 			"memo": "API 연동 테스트입니다.",
-			"id": "sJOzsUhBvFM"
+			"id": "sJOzsUhBvFM",
+			"content": "몰라"
 		},
 		{
 			"userId": 1,
@@ -67,6 +71,7 @@
 			"amount": 6961,
 			"type": "out",
 			"memo": "API 연동 테스트입니다.",
+			"content": "몰라",
 			"id": "LSF_WxXoLZo"
 		},
 		{
@@ -77,6 +82,7 @@
 			"amount": 9251,
 			"type": "out",
 			"memo": "수정된 메모 내용입니다! (PATCH 성공)",
+			"content": "몰라",
 			"id": "_GQV0C6eE_E"
 		},
 		{
@@ -88,6 +94,7 @@
 			"amount": 9307,
 			"type": "out",
 			"memo": "API 연동 테스트입니다.",
+			"content": "몰라아",
 			"id": "rZnKMTucik4"
 		},
 		{
@@ -99,6 +106,7 @@
 			"amount": 7343,
 			"type": "out",
 			"memo": "API 연동 테스트입니다.",
+			"content": "햐햐",
 			"id": "5alGSNkdX2c"
 		}
 	],
