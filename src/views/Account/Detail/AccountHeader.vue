@@ -1,9 +1,13 @@
 <template>
 	<div class="header">
-		<button class="btn-icon" @click="emit('back')">&#8249;</button>
+		<button class="btn-icon" @click="emit('back')">
+			<ChevronLeft :size="24" />
+		</button>
 		<span class="title">{{ title }}</span>
 		<div class="menu-wrap">
-			<button v-if="showMenu" class="btn-icon" @click="toggleMenu($event)">···</button>
+			<button v-if="showMenu" class="btn-icon" @click="toggleMenu($event)">
+				<Ellipsis :size="22" />
+			</button>
 			<div v-else class="btn-icon-placeholder" />
 		</div>
 	</div>
@@ -25,6 +29,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { ChevronLeft, Ellipsis } from "lucide-vue-next";
 
 const props = defineProps({
 	title: String,
@@ -68,7 +73,7 @@ function handleDelete() {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 20px;
+	padding: 0 10px;
 	height: 48px;
 	flex-shrink: 0;
 }
@@ -82,16 +87,17 @@ function handleDelete() {
 	color: #111;
 }
 .btn-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background: none;
 	border: none;
 	cursor: pointer;
-	font-size: 22px;
 	color: #111;
-	padding: 4px 8px;
-	line-height: 1;
+	padding: 4px;
 }
 .btn-icon-placeholder {
-	width: 40px;
+	width: 32px;
 }
 .menu-wrap {
 	position: relative;
