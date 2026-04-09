@@ -140,26 +140,27 @@ const TAB_LABELS = { in: "수입", out: "지출" };
 const EMOJI_OPTIONS = ["👍", "👎", "☺️", "😮", "😢"];
 
 const isMyAccount = computed(
-	() => me.value && account.value && account.value.userId === me.value.id,
+	() => me.value && account.value && String(account.value.userId) === String(me.value.id),
 );
 
 const userMap = computed(() => {
 	const map = {};
-	users.value.forEach((u) => (map[u.id] = u));
-	if (me.value) map[me.value.id] = me.value;
+	users.value.forEach((u) => (map[String(u.id)] = u));
+	if (me.value) map[String(me.value.id)] = me.value;
 	return map;
 });
 
 const rootComments = computed(() => comments.value.filter((c) => c.parentCommentId === null));
 
-const repliesOf = (parentId) => comments.value.filter((c) => c.parentCommentId === parentId);
+const repliesOf = (parentId) =>
+	comments.value.filter((c) => String(c.parentCommentId) === String(parentId));
 
 const reactionSummary = computed(() => {
 	const map = {};
 	reactions.value.forEach((r) => {
 		if (!map[r.emoji]) map[r.emoji] = { emoji: r.emoji, count: 0, myReactionId: null };
 		map[r.emoji].count++;
-		if (me.value && r.userId === me.value.id) map[r.emoji].myReactionId = r.id;
+		if (me.value && String(r.userId) === String(me.value.id)) map[r.emoji].myReactionId = r.id;
 	});
 	return EMOJI_OPTIONS.filter((e) => map[e]).map((e) => map[e]);
 });
@@ -205,14 +206,25 @@ async function load() {
 }
 
 async function toggleReaction(emoji) {
-	const existing = reactions.value.find((r) => r.emoji === emoji && r.userId === me.value?.id);
+	const existing = reactions.value.find(
+		(r) => r.emoji === emoji && String(r.userId) === String(me.value?.id),
+	);
 	if (existing) {
 		reactions.value = reactions.value.filter((r) => r.id !== existing.id);
 		await deleteReaction(existing.id);
 	} else {
-		const optimistic = { id: `temp_${Date.now()}`, userId: me.value.id, accountId, emoji };
+		const optimistic = {
+			id: `temp_${Date.now()}`,
+			userId: String(me.value.id),
+			accountId: String(accountId),
+			emoji,
+		};
 		reactions.value.push(optimistic);
-		const created = await createReaction({ userId: me.value.id, accountId, emoji });
+		const created = await createReaction({
+			userId: String(me.value.id),
+			accountId: String(accountId),
+			emoji,
+		});
 		const idx = reactions.value.findIndex((r) => r.id === optimistic.id);
 		if (idx !== -1) reactions.value[idx] = created;
 	}
@@ -221,8 +233,8 @@ async function toggleReaction(emoji) {
 async function submitComment(content, parentCommentId = null) {
 	if (!content.trim()) return;
 	const data = {
-		userId: me.value.id,
-		accountId,
+		userId: String(me.value.id),
+		accountId: String(accountId),
 		content: content.trim(),
 		createdAt: new Date().toISOString(),
 		parentCommentId,
@@ -364,6 +376,12 @@ onMounted(load);
 }
 .add-btn {
 	padding: 4px 12px;
+}
+
+/* 메뉴 wrap */
+.menu-wrap {
+	position: relative;
+	display: inline-flex;
 }
 
 /* 리액션 전용 드롭다운 */

@@ -14,7 +14,6 @@ export const getMe = () => {
  * @returns {Promise<Array>} 거래 내역 배열
  */
 export const getAccounts = (userId) => {
-	// userId 값을 쿼리 파라미터로 전달해 해당 유저의 기록만 필터링합니다.
 	return api.get("/account", { params: { userId } });
 };
 
@@ -24,7 +23,6 @@ export const getAccounts = (userId) => {
  * @returns {Promise<Object>} 거래 내역과 댓글이 포함된 객체
  */
 export const getAccountDetail = (accountId) => {
-	// _embed=comments 를 통해 관련 댓글 목록까지 같이 가져옵니다.
 	return api.get(`/account/${accountId}`, { params: { _embed: "comments" } });
 };
 
@@ -78,7 +76,10 @@ export const getUsers = () => http("/users");
 export const getAccount = (id) => http(`/account/${id}`);
 
 // 댓글 목록 (accountId 기준)
-export const getComments = (accountId) => http(`/comments?accountId=${accountId}`);
+export const getComments = async (accountId) => {
+	const all = await http("/comments");
+	return all.filter((c) => String(c.accountId) === String(accountId));
+};
 
 // 댓글 작성
 export const createComment = (data) =>
@@ -92,7 +93,10 @@ export const updateComment = (id, data) =>
 export const deleteComment = (id) => http(`/comments/${id}`, { method: "DELETE" });
 
 // 리액션 목록 (accountId 기준)
-export const getReactions = (accountId) => http(`/reactions?accountId=${accountId}`);
+export const getReactions = async (accountId) => {
+	const all = await http("/reactions");
+	return all.filter((r) => String(r.accountId) === String(accountId));
+};
 
 // 리액션 추가
 export const createReaction = (data) =>
