@@ -7,6 +7,7 @@
 			<div v-else class="btn-icon-placeholder" />
 		</div>
 	</div>
+	<div class="header-divider" />
 
 	<Teleport to="body">
 		<div
@@ -67,8 +68,13 @@ function handleDelete() {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 20px 12px;
+	padding: 0 20px;
+	height: 48px;
 	flex-shrink: 0;
+}
+.header-divider {
+	height: 1px;
+	background: #e5e5e5;
 }
 .title {
 	font-size: 17px;
