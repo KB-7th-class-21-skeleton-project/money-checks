@@ -125,7 +125,7 @@ import {
 } from "@/api/account.js";
 
 const route = useRoute();
-const accountId = Number(route.params.id);
+const accountId = route.params.id;
 
 const me = ref(null);
 const users = ref([]);
