@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { reactive, onMounted, computed, ref } from "vue";
 import axios from "axios";
 import CategorySelect from "./components/CategorySelect.vue";
+import AccountHeader from "../Detail/AccountHeader.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -74,17 +75,6 @@ const handleSubmit = async () => {
 	}
 };
 
-// const handleDelete = async () => {
-// 	const url = "http://localhost:3000/account";
-// 	if (!confirm("삭제하시겠습니까?")) return;
-// 	try {
-// 		await axios.delete(`${url}/${accountId}`);
-// 		router.push("/account");
-// 	} catch (error) {
-// 		console.error("삭제 실패:", error);
-// 	}
-// };
-
 const isShowCategory = ref(false); //처음 false
 
 const selectCategory = (name) => {
@@ -101,11 +91,8 @@ onMounted(loadData);
 
 <template>
 	<div class="page-container">
-		<!-- 나중에 상단바 맞추기 -->
-		<header class="form-header">
-			<button @click="router.back()" class="back-btn">〈</button>
-			<h2 class="header-title">{{ formData.type === "in" ? "수입" : "지출" }}</h2>
-		</header>
+		<!-- 컴포넌트 불러오기 -->
+		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="router.back()" />
 
 		<div class="type-tap-group">
 			<button
@@ -149,7 +136,6 @@ onMounted(loadData);
 					@click="isShowCategory = true"
 					class="input-field"
 				/>
-				<!-- <input type="" v-model.number="formData.amount" /> -->
 			</div>
 			<div class="input-group">
 				<label>내용</label>
@@ -160,11 +146,9 @@ onMounted(loadData);
 				<textarea v-model="formData.memo" placeholder="메모" class="memo-area"></textarea>
 			</div>
 		</main>
-		<!-- 상단바 만들기 전 저장확인 위한 버튼 -->
 
 		<div class="container">
 			<button @click="handleSubmit" class="save-btn">저장</button>
-			<!-- <button v-if="isEditMode" @click="handleDelete" class="delete-btn">삭제</button> -->
 		</div>
 
 		<CategorySelect
@@ -196,7 +180,6 @@ onMounted(loadData);
 	flex-shrink: 0;
 }
 
-/* 입력창 공통 스타일 */
 .input-field {
 	flex: 1;
 	border: none;
@@ -210,9 +193,9 @@ onMounted(loadData);
 
 /* 금액 입력 시 '원' 표시를 위한 스타일 */
 .amount-wrapper {
-	flex: 1; /* 전체 박스는 꽉 채우되 */
+	flex: 1;
 	display: flex;
-	justify-content: space-between; /* 안쪽 내용물은 왼쪽으로 */
+	justify-content: space-between;
 	align-items: center;
 	background-color: #f8f9fa;
 	border-radius: 10px;
@@ -315,34 +298,13 @@ onMounted(loadData);
 	line-height: 1.2;
 }
 
-/* 수입 활성화 */
 .in-btn.active {
 	border-color: #ffcc00;
 	color: #ffcc00;
 }
-/* 지출 활성화 */
+
 .out-btn.active {
 	border-color: #444;
 	color: #444;
-}
-
-/* 상단 헤더 */
-.form-header {
-	display: flex;
-	align-items: center;
-	padding: 10px 20px;
-	border-bottom: 1px solid #f1f1f1;
-}
-.back-btn {
-	border: none;
-	background: none;
-	font-size: 20px;
-	cursor: pointer;
-}
-.header-title {
-	flex: 1;
-	text-align: center;
-	font-size: 18px;
-	margin-right: 30px;
 }
 </style>
