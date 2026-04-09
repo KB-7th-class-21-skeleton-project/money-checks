@@ -1,8 +1,13 @@
-<script setup></script>
+<script setup>
+import TransactionList from "@/views/Accoount/components/TransactionList.vue";
+</script>
 
 <template>
 	<div>
-		<h1>가계부 내역 (Account)</h1>
+		<div class="account-header-container"></div>
+		<div class="account-main-container">
+			<TransactionList />
+		</div>
 	</div>
 </template>
 
