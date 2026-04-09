@@ -1,10 +1,10 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-// import EditForm from "./components/EditForm.vue";
 import { reactive, onMounted, computed, ref } from "vue";
 import axios from "axios";
 import CategorySelect from "./components/CategorySelect.vue";
 import AccountHeader from "../Detail/AccountHeader.vue";
+import ToggleSwitch from "./components/ToggleSwitch.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -35,6 +35,7 @@ const formData = reactive({
 	memo: "",
 	type: "out", //디폴트 지출
 	userId: 1,
+	isPublic: true, //공개여부 디폴트 공개
 });
 
 const isEditMode = computed(() => !!accountId);
@@ -91,26 +92,28 @@ onMounted(loadData);
 
 <template>
 	<div class="page-container">
-		<!-- 컴포넌트 불러오기 -->
 		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="router.back()" />
 
 		<div class="type-tap-group">
-			<button
-				type="button"
-				class="tab-btn in-btn"
-				:class="{ active: formData.type === 'in' }"
-				@click="setType('in')"
-			>
-				수입
-			</button>
-			<button
-				type="button"
-				class="tab-btn out-btn"
-				:class="{ active: formData.type === 'out' }"
-				@click="setType('out')"
-			>
-				지출
-			</button>
+			<div class="tabs">
+				<button
+					type="button"
+					class="tab-btn in-btn"
+					:class="{ active: formData.type === 'in' }"
+					@click="setType('in')"
+				>
+					수입
+				</button>
+				<button
+					type="button"
+					class="tab-btn out-btn"
+					:class="{ active: formData.type === 'out' }"
+					@click="setType('out')"
+				>
+					지출
+				</button>
+			</div>
+			<ToggleSwitch v-model="formData.isPublic" />
 		</div>
 		<main class="form-body">
 			<div class="input-group">
@@ -161,7 +164,7 @@ onMounted(loadData);
 
 <style scoped>
 .form-body {
-	padding: 20px;
+	padding: 0px 20px 20px 20px;
 	background-color: #fff;
 }
 
@@ -199,7 +202,8 @@ onMounted(loadData);
 	align-items: center;
 	background-color: #f8f9fa;
 	border-radius: 10px;
-	padding: 0 16px 0 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 .amount-input {
@@ -208,13 +212,16 @@ onMounted(loadData);
 	border: none;
 	outline: none;
 	font-size: 16px;
-	padding: 12px 0 12px 16px;
+	padding: 12px 16px;
 	text-align: left;
+	width: 0;
 }
 
 .unit {
 	color: #333;
 	font-weight: bold;
+	padding-right: 16px;
+	white-space: nowrap;
 }
 
 .datetime-inputs {
@@ -281,7 +288,8 @@ onMounted(loadData);
 	display: flex;
 	gap: 10px !important;
 	align-items: flex-start;
-	padding: 20px;
+	padding: 20px 20px 0 20px;
+	margin-bottom: 0;
 	background-color: #fff;
 }
 
@@ -306,5 +314,18 @@ onMounted(loadData);
 .out-btn.active {
 	border-color: #444;
 	color: #444;
+}
+
+.type-tap-group {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #fff;
+}
+
+.tabs {
+	display: flex;
+	gap: 10px;
 }
 </style>
