@@ -11,7 +11,10 @@ export const getMe = () => api.get("/me");
  * @param {string|number} userId - 조회할 유저 ID
  * @returns {Promise<Array>} 거래 내역 배열
  */
-export const getAccounts = (userId) => api.get("/account", { params: { userId } });
+export const getAccounts = async (userId) => {
+	const all = await api.get("/account");
+	return all.filter((a) => String(a.userId) === String(userId));
+};
 
 /**
  * 특정 거래 내역 1건을 상세 조회합니다. (댓글 포함)
