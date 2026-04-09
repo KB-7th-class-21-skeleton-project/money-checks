@@ -90,14 +90,23 @@
 
 	<!-- 바깥 클릭 시 이모지 피커 닫기 -->
 	<div v-if="showEmojiPicker" class="overlay" @click="showEmojiPicker = false" />
+
+	<!-- 삭제 확인 모달 -->
+	<ConfirmModal
+		v-if="showDeleteModal"
+		message="정말 삭제하시겠어요?"
+		@confirm="confirmDelete"
+		@cancel="showDeleteModal = false"
+	/>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import CommentItem from "./CommentItem.vue";
 import UserAvatar from "./UserAvatar.vue";
 import AccountHeader from "./AccountHeader.vue";
+import ConfirmModal from "./ConfirmModal.vue";
 import {
 	getMe,
 	getUsers,
@@ -109,9 +118,11 @@ import {
 	getReactions,
 	createReaction,
 	deleteReaction,
+	deleteAccount,
 } from "@/api/account.js";
 
 const route = useRoute();
+const router = useRouter();
 const accountId = route.params.id;
 
 const me = ref(null);
@@ -123,6 +134,7 @@ const loading = ref(false);
 const error = ref(null);
 const newComment = ref("");
 const showEmojiPicker = ref(false);
+const showDeleteModal = ref(false);
 
 const TAB_LABELS = { in: "수입", out: "지출" };
 const EMOJI_OPTIONS = ["👍", "👎", "☺️", "😮", "😢"];
@@ -243,11 +255,17 @@ function pickEmoji(emoji) {
 }
 
 function handleEditAccount() {
-	// TODO: 수정 페이지로 이동
+	router.push(`/account/edit/${accountId}`);
 }
 
 function handleDeleteAccount() {
-	// TODO: 삭제 처리
+	showDeleteModal.value = true;
+}
+
+async function confirmDelete() {
+	await deleteAccount(accountId);
+	showDeleteModal.value = false;
+	router.replace("/account?user=me");
 }
 
 const filteredEmojiOptions = computed(() => {
