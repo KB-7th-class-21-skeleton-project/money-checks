@@ -58,16 +58,16 @@ const categories = [
 
 .grid-layout {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* 4열 정렬 */
+	grid-template-columns: repeat(4, 1fr);
 	gap: 12px;
 }
 
 .category-item {
 	display: flex;
-	flex-direction: column; /* 아이콘과 글자를 세로로 배치 */
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 15px 0; /* 상하 여백을 넉넉히 */
+	padding: 15px 0;
 	border: 1px solid #eee;
 	border-radius: 12px;
 	background: #fff;

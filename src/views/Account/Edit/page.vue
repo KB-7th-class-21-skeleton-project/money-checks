@@ -183,17 +183,17 @@ onMounted(loadData);
 
 .form-body .input-group {
 	display: flex;
-	justify-content: flex-start; /* 핵심: 왼쪽 정렬 */
+	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 16px;
-	gap: 15px; /* 라벨과 입력창 사이 간격 */
+	gap: 15px;
 }
 
 .input-group label {
 	color: #adb5bd;
 	font-size: 16px;
 	width: 80px;
-	flex-shrink: 0; /* 라벨 너비가 줄어들지 않게 고정 */
+	flex-shrink: 0;
 }
 
 /* 입력창 공통 스타일 */
@@ -205,7 +205,7 @@ onMounted(loadData);
 	border-radius: 10px;
 	font-size: 16px;
 	outline: none;
-	text-align: left; /* 글자 왼쪽 정렬 */
+	text-align: left;
 }
 
 /* 금액 입력 시 '원' 표시를 위한 스타일 */
@@ -220,13 +220,13 @@ onMounted(loadData);
 }
 
 .amount-input {
-	flex: 1; /* 추가: 입력창이 '원' 앞까지 공간을 다 채우도록 */
+	flex: 1;
 	background-color: transparent;
 	border: none;
 	outline: none;
 	font-size: 16px;
 	padding: 12px 0 12px 16px;
-	text-align: left; /* 숫자는 왼쪽부터 써지게 */
+	text-align: left;
 }
 
 .unit {
@@ -234,7 +234,6 @@ onMounted(loadData);
 	font-weight: bold;
 }
 
-/* 4. 날짜/시간 입력창 스타일 */
 .datetime-inputs {
 	display: flex;
 	gap: 8px;
@@ -249,10 +248,9 @@ onMounted(loadData);
 	font-family: inherit;
 }
 
-/* 1. 메모 칸 높이 조절 및 스타일 정렬 */
 .memo-area {
-	flex: 1; /* 다른 input-field들처럼 남은 공간을 다 차지하게 함 */
-	height: 80px; /* 기존 150px에서 절반 정도로 축소 */
+	flex: 1;
+	height: 80px;
 	border: none;
 	background-color: #f8f9fa;
 	padding: 12px 16px;
@@ -262,7 +260,6 @@ onMounted(loadData);
 	outline: none;
 }
 
-/* 2. 메모 라벨만 위쪽으로 정렬 (텍스트박스가 높기 때문) */
 .input-group.align-top {
 	align-items: flex-start;
 }
@@ -272,42 +269,27 @@ onMounted(loadData);
 }
 
 .container {
-	/* 버튼이 너무 화면 끝까지 붙지 않도록 감싸는 부모에게 여백을 줍니다 */
 	padding: 20px;
 	width: 100%;
 }
 
 .save-btn {
-	/* 핵심: 가로 너비를 100%로 설정 */
 	width: 100%;
-
-	/* 세로 높이 및 안쪽 여백 */
 	padding: 15px 0;
-
-	/* 배경색과 글자색 (사진의 노란색 느낌) */
 	background-color: #ffcc00;
 	color: white;
-
-	/* 테두리 및 모서리 둥글게 */
 	border: none;
 	border-radius: 8px;
-
-	/* 글꼴 스타일 */
 	font-size: 18px;
 	font-weight: bold;
-
-	/* 클릭할 수 있다는 표시 */
 	cursor: pointer;
-
-	/* 눌렀을 때 반응 속도 */
 	transition: background-color 0.2s;
 }
 
 .save-btn:hover {
-	background-color: #e6b800; /* 마우스 올렸을 때 더 진하게 */
+	background-color: #e6b800;
 }
 
-/* 클릭했을 때 살짝 눌리는 느낌 */
 .save-btn:active {
 	transform: scale(0.98);
 }
@@ -315,12 +297,9 @@ onMounted(loadData);
 .type-tap-group {
 	display: flex;
 	gap: 10px !important;
-
-	/* 자식(버튼)들이 부모 높이에 맞춰 늘어나는 것을 방지 */
 	align-items: flex-start;
-
 	padding: 20px;
-	background-color: #fff; /* 배경색이 섞이지 않게 */
+	background-color: #fff;
 }
 
 .tab-btn {

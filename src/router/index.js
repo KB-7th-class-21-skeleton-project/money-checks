@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// Layout
+const MainLayout = () => import("@/layouts/MainLayout.vue");
+
 // Lazy loading components using new folder structure
 const AccountList = () => import("@/views/Account/page.vue");
 const AccountDetail = () => import("@/views/Account/Detail/page.vue");
@@ -11,12 +14,28 @@ const Test = () => import("@/views/Test.vue");
 const routes = [
 	{
 		path: "/",
-		redirect: "/account",
-	},
-	{
-		path: "/account",
-		name: "AccountList",
-		component: AccountList,
+		component: MainLayout,
+		children: [
+			{
+				path: "",
+				redirect: "/account",
+			},
+			{
+				path: "account",
+				name: "AccountList",
+				component: AccountList,
+			},
+			{
+				path: "chart",
+				name: "Chart",
+				component: Chart,
+			},
+			{
+				path: "profile",
+				name: "Profile",
+				component: Profile,
+			},
+		],
 	},
 	{
 		path: "/account/edit/:id",
@@ -27,16 +46,6 @@ const routes = [
 		path: "/account/:id",
 		name: "AccountDetail",
 		component: AccountDetail,
-	},
-	{
-		path: "/chart",
-		name: "Chart",
-		component: Chart,
-	},
-	{
-		path: "/profile",
-		name: "Profile",
-		component: Profile,
 	},
 	{
 		path: "/test",
