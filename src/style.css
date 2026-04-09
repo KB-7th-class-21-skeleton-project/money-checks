@@ -1,4 +1,75 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 900;
+	font-display: swap;
+	src:
+		local("Pretendard Black"),
+		url("/fonts/Pretendard-Black.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 800;
+	font-display: swap;
+	src:
+		local("Pretendard ExtraBold"),
+		url("/fonts/Pretendard-ExtraBold.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 700;
+	font-display: swap;
+	src:
+		local("Pretendard Bold"),
+		url("/fonts/Pretendard-Bold.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 600;
+	font-display: swap;
+	src:
+		local("Pretendard SemiBold"),
+		url("/fonts/Pretendard-SemiBold.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 500;
+	font-display: swap;
+	src:
+		local("Pretendard Medium"),
+		url("/fonts/Pretendard-Medium.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 400;
+	font-display: swap;
+	src:
+		local("Pretendard Regular"),
+		url("/fonts/Pretendard-Regular.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 300;
+	font-display: swap;
+	src:
+		local("Pretendard Light"),
+		url("/fonts/Pretendard-Light.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 200;
+	font-display: swap;
+	src:
+		local("Pretendard ExtraLight"),
+		url("/fonts/Pretendard-ExtraLight.subset.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 100;
+	font-display: swap;
+	src:
+		local("Pretendard Thin"),
+		url("/fonts/Pretendard-Thin.subset.woff2") format("woff2");
+}
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -6,6 +77,22 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+	/* Typography */
+	--font-sans:
+		"Pretendard", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+
+	/* --- Design System Colors --- */
+	--color-primary: #ffd100;
+	--color-white: #ffffff;
+	--color-black: #000000;
+	--color-gray-100: #f8f9fa;
+	--color-gray-300: #e5e5e5;
+	--color-gray-400: #bdbdbd;
+	--color-gray-700: #666666;
+	--color-gray-900: #333333;
+	/* ---------------------------- */
+
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
@@ -16,7 +103,6 @@
 	--color-card-foreground: var(--card-foreground);
 	--color-popover: var(--popover);
 	--color-popover-foreground: var(--popover-foreground);
-	--color-primary: var(--primary);
 	--color-primary-foreground: var(--primary-foreground);
 	--color-secondary: var(--secondary);
 	--color-secondary-foreground: var(--secondary-foreground);
@@ -117,6 +203,6 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-muted/30 text-foreground;
+		@apply bg-muted/30 text-foreground font-sans;
 	}
 }
