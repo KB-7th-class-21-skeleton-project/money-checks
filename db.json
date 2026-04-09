@@ -1,136 +1,197 @@
 {
-	"me": {
-		"id": 1,
-		"name": "김국민",
-		"email": "kb@example.com",
-		"profileUrl": "/images/profiles/me.png",
-		"friendIds": [2, 3]
-	},
-	"users": [
-		{
-			"id": "2",
-			"name": "박토스",
-			"profileUrl": "/images/profiles/p2.png"
-		},
-		{
-			"id": "3",
-			"name": "이신한",
-			"profileUrl": "/images/profiles/p3.png"
-		}
-	],
-	"account": [
-		{
-			"id": "101",
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "14:30",
-			"category": "카페",
-			"amount": 5500,
-			"type": "out",
-			"content": "스타벅스",
-			"memo": "팀원들이랑 커피 한 잔"
-		},
-		{
-			"id": "102",
-			"userId": 2,
-			"date": "2026-04-07",
-			"time": "18:00",
-			"category": "식비",
-			"amount": 25000,
-			"type": "out",
-			"content": "몰라치킨",
-			"memo": "저녁은 치킨!"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-			"category": "기타",
-			"amount": 1556,
-			"type": "out",
-			"memo": "API 연동 테스트입니다.",
-			"content": "몰라",
-			"id": "UJTv3hF9o8Y"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-			"category": "기타",
-			"amount": 2670,
-			"type": "out",
-			"memo": "API 연동 테스트입니다.",
-			"id": "sJOzsUhBvFM",
-			"content": "몰라"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-			"category": "기타",
-			"amount": 6961,
-			"type": "out",
-			"memo": "API 연동 테스트입니다.",
-			"content": "몰라",
-			"id": "LSF_WxXoLZo"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-			"category": "기타",
-			"amount": 9251,
-			"type": "out",
-			"memo": "수정된 메모 내용입니다! (PATCH 성공)",
-			"content": "몰라",
-			"id": "_GQV0C6eE_E"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-
-			"category": "기타",
-			"amount": 9307,
-			"type": "out",
-			"memo": "API 연동 테스트입니다.",
-			"content": "몰라아",
-			"id": "rZnKMTucik4"
-		},
-		{
-			"userId": 1,
-			"date": "2026-04-07",
-			"time": "12:00",
-
-			"category": "기타",
-			"amount": 7343,
-			"type": "out",
-			"memo": "API 연동 테스트입니다.",
-			"content": "햐햐",
-			"id": "5alGSNkdX2c"
-		}
-	],
-	"categories": [
-		{ "id": "1", "type": "out", "name": "식비", "icon": "🍔" },
-		{ "id": "2", "type": "out", "name": "카페", "icon": "☕" },
-		{ "id": "3", "type": "out", "name": "교통", "icon": "🚌" },
-		{ "id": "4", "type": "out", "name": "쇼핑", "icon": "🛒" },
-		{ "id": "5", "type": "out", "name": "문화/여가", "icon": "🎬" },
-		{ "id": "6", "type": "out", "name": "건강", "icon": "💊" },
-		{ "id": "7", "type": "out", "name": "기타", "icon": "📦" },
-		{ "id": "8", "type": "in", "name": "급여", "icon": "💰" },
-		{ "id": "9", "type": "in", "name": "용돈", "icon": "💵" },
-		{ "id": "10", "type": "in", "name": "금융수입", "icon": "📈" },
-		{ "id": "11", "type": "in", "name": "기타", "icon": "🎁" }
-	],
-	"comments": [
-		{
-			"id": "1",
-			"accountId": 102,
-			"userId": 1,
-			"content": "치킨 맛있겠네요!",
-			"createdAt": "2026-04-07T18:05:00Z"
-		}
-	],
-	"$schema": "./node_modules/json-server/schema.json"
+  "me": {
+    "id": "1",
+    "name": "김국민",
+    "email": "kb@example.com",
+    "profileUrl": "/images/profiles/me.png",
+    "friendIds": [
+      "2",
+      "3"
+    ]
+  },
+  "users": [
+    {
+      "id": "2",
+      "name": "박토스",
+      "profileUrl": "/images/profiles/p2.png"
+    },
+    {
+      "id": "3",
+      "name": "이신한",
+      "profileUrl": "/images/profiles/p3.png"
+    }
+  ],
+  "account": [
+    {
+      "id": "101",
+      "userId": "1",
+      "date": "2026-04-01",
+      "time": "14:30",
+      "bankName": "KB국민은행",
+      "content": "스타벅스 강남점",
+      "category": "카페",
+      "amount": 5500,
+      "type": "out",
+      "memo": "팀원들이랑 커피 한 잔"
+    },
+    {
+      "id": "102",
+      "userId": "2",
+      "date": "2026-04-07",
+      "time": "18:00",
+      "bankName": "카카오뱅크",
+      "content": "배달의민족",
+      "category": "식비",
+      "amount": 25000,
+      "type": "out",
+      "memo": "저녁은 치킨!"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "type": "out",
+      "name": "식비",
+      "icon": "🍔"
+    },
+    {
+      "id": "2",
+      "type": "out",
+      "name": "카페",
+      "icon": "☕"
+    },
+    {
+      "id": "3",
+      "type": "out",
+      "name": "교통",
+      "icon": "🚌"
+    },
+    {
+      "id": "4",
+      "type": "out",
+      "name": "쇼핑",
+      "icon": "🛒"
+    },
+    {
+      "id": "5",
+      "type": "out",
+      "name": "문화/여가",
+      "icon": "🎬"
+    },
+    {
+      "id": "6",
+      "type": "out",
+      "name": "건강",
+      "icon": "💊"
+    },
+    {
+      "id": "7",
+      "type": "out",
+      "name": "기타",
+      "icon": "📦"
+    },
+    {
+      "id": "8",
+      "type": "in",
+      "name": "급여",
+      "icon": "💰"
+    },
+    {
+      "id": "9",
+      "type": "in",
+      "name": "용돈",
+      "icon": "💵"
+    },
+    {
+      "id": "10",
+      "type": "in",
+      "name": "금융수입",
+      "icon": "📈"
+    },
+    {
+      "id": "11",
+      "type": "in",
+      "name": "기타",
+      "icon": "🎁"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "accountId": "102",
+      "userId": "3",
+      "content": "치킨 맛있겠네요!",
+      "createdAt": "2026-04-07T18:05:00Z",
+      "parentCommentId": null
+    },
+    {
+      "id": "2",
+      "accountId": "102",
+      "userId": "1",
+      "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
+      "createdAt": "2026-04-07T18:05:00Z",
+      "parentCommentId": null
+    },
+    {
+      "id": "3",
+      "accountId": "101",
+      "userId": "1",
+      "content": "나도 커피 마시고 싶다",
+      "createdAt": "2026-04-01T06:36:05Z",
+      "parentCommentId": null
+    },
+    {
+      "userId": "1",
+      "accountId": "102",
+      "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
+      "createdAt": "2026-04-09T04:34:54.964Z",
+      "parentCommentId": "2",
+      "id": "YBkx_rwx43Q"
+    }
+  ],
+  "reactions": [
+    {
+      "id": "1",
+      "userId": "2",
+      "accountId": "102",
+      "emoji": "👍"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "accountId": "102",
+      "emoji": "☺️"
+    },
+    {
+      "id": "3",
+      "userId": "1",
+      "accountId": "101",
+      "emoji": "😢"
+    },
+    {
+      "userId": "1",
+      "accountId": "101",
+      "emoji": "👍",
+      "id": "TsIgDdWrSbE"
+    },
+    {
+      "userId": "1",
+      "accountId": "101",
+      "emoji": "👎",
+      "id": "uN0nPJD6R4c"
+    },
+    {
+      "userId": "1",
+      "accountId": "102",
+      "emoji": "👎",
+      "id": "vcQigHoWKFk"
+    },
+    {
+      "userId": "1",
+      "accountId": "102",
+      "emoji": "😮",
+      "id": "bw0yaeCkFcI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
