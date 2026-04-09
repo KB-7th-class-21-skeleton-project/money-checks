@@ -61,7 +61,7 @@ importers:
         specifier: ^10.8.0
         version: 10.8.0(eslint@10.2.0(jiti@2.6.1))(vue-eslint-parser@10.4.0(eslint@10.2.0(jiti@2.6.1)))
       json-server:
-        specifier: 1.0.0-beta.15
+        specifier: ^1.0.0-beta.15
         version: 1.0.0-beta.15
       prettier:
         specifier: ^3.8.1
