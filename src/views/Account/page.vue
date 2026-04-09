@@ -1,5 +1,5 @@
 <script setup>
-import TransactionList from "@/views/Accoount/components/TransactionList.vue";
+import TransactionList from "@/views/Account/components/TransactionList.vue";
 </script>
 
 <template>

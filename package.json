@@ -1,40 +1,40 @@
 {
-  "name": "kb-moneybook",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "concurrently \"vite\" \"json-server --watch db.json --port 3000\"",
-    "build": "vite build",
-    "preview": "pnpm run build && wrangler dev",
-    "start:render": "json-server db.json --port ${PORT:-3000} --host 0.0.0.0",
-    "start": "pnpm run start:render",
-    "deploy": "pnpm run build && wrangler deploy"
-  },
-  "dependencies": {
-    "@tanstack/vue-query": "^5.96.2",
-    "axios": "^1.14.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-vue-next": "^1.0.0",
-    "pinia": "^3.0.4",
-    "tailwind-merge": "^3.5.0",
-    "vue": "^3.5.32",
-    "vue-router": "^5.0.4"
-  },
-  "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.31.1",
-    "@tailwindcss/vite": "^4.2.2",
-    "@vitejs/plugin-vue": "^6.0.5",
-    "concurrently": "^9.2.1",
-    "eslint": "^10.2.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "^10.8.0",
-    "json-server": "1.0.0-beta.15",
-    "prettier": "^3.8.1",
-    "tailwindcss": "^4.2.2",
-    "tw-animate-css": "^1.4.0",
-    "vite": "^8.0.4",
-    "wrangler": "^4.81.0"
-  }
+	"name": "kb-moneybook",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "concurrently \"vite\" \"json-server --watch db.json --port 3000\"",
+		"build": "vite build",
+		"preview": "pnpm run build && wrangler dev",
+		"start:render": "json-server db.json --port ${PORT:-3000} --host 0.0.0.0",
+		"start": "pnpm run start:render",
+		"deploy": "pnpm run build && wrangler deploy"
+	},
+	"dependencies": {
+		"@tanstack/vue-query": "^5.96.2",
+		"axios": "^1.14.0",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"lucide-vue-next": "^1.0.0",
+		"pinia": "^3.0.4",
+		"tailwind-merge": "^3.5.0",
+		"vue": "^3.5.32",
+		"vue-router": "^5.0.4"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.31.1",
+		"@tailwindcss/vite": "^4.2.2",
+		"@vitejs/plugin-vue": "^6.0.5",
+		"concurrently": "^9.2.1",
+		"eslint": "^10.2.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-vue": "^10.8.0",
+		"json-server": "1.0.0-beta.15",
+		"prettier": "^3.8.1",
+		"tailwindcss": "^4.2.2",
+		"tw-animate-css": "^1.4.0",
+		"vite": "^8.0.4",
+		"wrangler": "^4.81.0"
+	}
 }
