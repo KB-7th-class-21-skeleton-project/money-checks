@@ -5,13 +5,13 @@
 
 		<template v-else-if="account">
 			<!-- 헤더 -->
-			<div class="header">
-				<button class="btn-icon" @click="$router.back()">&#8249;</button>
-				<span class="title">{{ TAB_LABELS[account.type] }}</span>
-				<div class="menu-wrap">
-					<button class="btn-icon" @click="toggleHeaderMenu($event)">···</button>
-				</div>
-			</div>
+			<AccountHeader
+				:title="TAB_LABELS[account.type]"
+				:show-menu="isMyAccount"
+				@back="$router.back()"
+				@edit="handleEditAccount"
+				@delete="handleDeleteAccount"
+			/>
 
 			<!-- 상세 정보 -->
 			<div class="detail-rows">
@@ -88,22 +88,8 @@
 		</template>
 	</div>
 
-	<!-- 바깥 클릭 시 메뉴 닫기 -->
-	<div v-if="showHeaderMenu" class="overlay" @click="showHeaderMenu = false" />
 	<!-- 바깥 클릭 시 이모지 피커 닫기 -->
 	<div v-if="showEmojiPicker" class="overlay" @click="showEmojiPicker = false" />
-
-	<!-- 헤더 메뉴 fixed dropdown -->
-	<Teleport to="body">
-		<div
-			v-if="showHeaderMenu"
-			class="dropdown-fixed"
-			:style="{ top: headerMenuPos.top + 'px', right: headerMenuPos.right + 'px' }"
-		>
-			<button @click="handleEditAccount">수정</button>
-			<button class="danger" @click="handleDeleteAccount">삭제</button>
-		</div>
-	</Teleport>
 </template>
 
 <script setup>
@@ -111,6 +97,7 @@ import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import CommentItem from "./CommentItem.vue";
 import UserAvatar from "./UserAvatar.vue";
+import AccountHeader from "./AccountHeader.vue";
 import {
 	getMe,
 	getUsers,
@@ -136,24 +123,13 @@ const loading = ref(false);
 const error = ref(null);
 const newComment = ref("");
 const showEmojiPicker = ref(false);
-const showHeaderMenu = ref(false);
-const headerMenuPos = ref({ top: 0, right: 0 });
-
-function toggleHeaderMenu(event) {
-	if (showHeaderMenu.value) {
-		showHeaderMenu.value = false;
-	} else {
-		const rect = event.currentTarget.getBoundingClientRect();
-		headerMenuPos.value = {
-			top: rect.bottom + 4,
-			right: window.innerWidth - rect.right,
-		};
-		showHeaderMenu.value = true;
-	}
-}
 
 const TAB_LABELS = { in: "수입", out: "지출" };
 const EMOJI_OPTIONS = ["👍", "👎", "☺️", "😮", "😢"];
+
+const isMyAccount = computed(
+	() => me.value && account.value && account.value.userId === me.value.id,
+);
 
 const userMap = computed(() => {
 	const map = {};
@@ -173,7 +149,6 @@ const reactionSummary = computed(() => {
 		map[r.emoji].count++;
 		if (me.value && r.userId === me.value.id) map[r.emoji].myReactionId = r.id;
 	});
-	// EMOJI_OPTIONS 순서대로 정렬
 	return EMOJI_OPTIONS.filter((e) => map[e]).map((e) => map[e]);
 });
 
@@ -268,12 +243,10 @@ function pickEmoji(emoji) {
 }
 
 function handleEditAccount() {
-	showHeaderMenu.value = false;
 	// TODO: 수정 페이지로 이동
 }
 
 function handleDeleteAccount() {
-	showHeaderMenu.value = false;
 	// TODO: 삭제 처리
 }
 
@@ -303,34 +276,6 @@ onMounted(load);
 }
 .state-msg.error {
 	color: #e05;
-}
-
-/* 헤더 */
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 16px 20px 12px;
-	flex-shrink: 0;
-}
-.title {
-	font-size: 17px;
-	font-weight: 600;
-	color: #111;
-}
-.btn-icon {
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: 22px;
-	color: #111;
-	padding: 4px 8px;
-	line-height: 1;
-}
-
-/* 헤더 메뉴 */
-.menu-wrap {
-	position: relative;
 }
 
 /* 상세 정보 */
@@ -426,17 +371,8 @@ onMounted(load);
 	justify-content: center;
 	border-radius: 8px;
 }
-
 .emoji-item:hover {
 	background: #fffbe6 !important;
-}
-
-/* 남은 이모지 없을 때 메시지 */
-.no-emoji {
-	font-size: 12px;
-	color: #999;
-	padding: 8px 12px;
-	white-space: nowrap;
 }
 
 /* 오버레이 */
@@ -521,38 +457,5 @@ onMounted(load);
 	position: fixed;
 	inset: 0;
 	z-index: 99;
-}
-
-/* fixed dropdown */
-.dropdown-fixed {
-	position: fixed;
-	background: #fff;
-	border: 1px solid #e0e0e0;
-	border-radius: 10px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-	z-index: 200;
-	overflow: hidden;
-	min-width: fit-content;
-}
-.dropdown-fixed button {
-	display: block;
-	width: 100%;
-	padding: 10px 20px;
-	background: none;
-	border: none;
-	font-size: 14px;
-	color: #111;
-	cursor: pointer;
-	text-align: left;
-	white-space: nowrap;
-}
-.dropdown-fixed button:hover {
-	background: #f5f5f5;
-}
-.dropdown-fixed button.danger {
-	color: #e55;
-}
-.dropdown-fixed button.danger:hover {
-	background: #fef0f0;
 }
 </style>
