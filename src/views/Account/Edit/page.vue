@@ -83,6 +83,10 @@ const selectCategory = (name) => {
 	isShowCategory.value = false; //선택 끝나면 숨기기
 };
 
+const closeCategory = () => {
+	isShowCategory.value = false;
+};
+
 const setType = (type) => {
 	formData.type = type;
 };
@@ -155,9 +159,10 @@ onMounted(loadData);
 		</div>
 
 		<CategorySelect
-			v-if="isShowCategory"
+			:is-open="isShowCategory"
 			:selected="formData.category"
 			@select="selectCategory"
+			@close="closeCategory"
 		></CategorySelect>
 	</div>
 </template>
@@ -266,7 +271,7 @@ onMounted(loadData);
 .save-btn {
 	width: 100%;
 	padding: 15px 0;
-	background-color: #ffcc00;
+	background-color: #ffd100;
 	color: white;
 	border: none;
 	border-radius: 8px;
@@ -307,8 +312,8 @@ onMounted(loadData);
 }
 
 .in-btn.active {
-	border-color: #ffcc00;
-	color: #ffcc00;
+	border-color: #ffd100;
+	color: #ffd100;
 }
 
 .out-btn.active {
