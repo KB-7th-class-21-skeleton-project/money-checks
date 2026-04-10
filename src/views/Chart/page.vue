@@ -189,12 +189,7 @@
 					:value="budgetInput"
 					placeholder="0"
 					autofocus
-					@input="
-						(e) => {
-							budgetInput = e.target.value.replace(/[^0-9]/g, '');
-							e.target.value = budgetInput;
-						}
-					"
+					@input="onBudgetInput"
 				/>
 				<span class="sheet-unit">원</span>
 			</div>
@@ -395,6 +390,11 @@ const nextMonth = () => {
 };
 
 // ── 예산 설정 ──────────────────────────────────────────
+const onBudgetInput = (e) => {
+	budgetInput.value = e.target.value.replace(/[^0-9]/g, "");
+	e.target.value = budgetInput.value;
+};
+
 const openBudgetSheet = () => {
 	budgetInput.value = budget.total || "";
 	showBudgetSheet.value = true;
@@ -405,9 +405,9 @@ const resetBudget = () => {
 };
 
 const confirmReset = async () => {
-	if (budget.id) {
-		await deleteBudget(budget.id);
-	}
+	const userId = me.value.id;
+	const all = await getBudget({ userId, year: currentYear.value, month: currentMonth.value });
+	await Promise.all(all.map((b) => deleteBudget(b.id)));
 	showResetConfirm.value = false;
 	showBudgetSheet.value = false;
 	await loadChartData();
@@ -417,18 +417,27 @@ const saveBudget = async () => {
 	const amount = Number(budgetInput.value);
 	if (!amount || amount <= 0) return;
 	const userId = me.value.id;
-	if (budget.id) {
-		await patchBudget(budget.id, { amount });
-	} else {
-		await postBudget({
-			userId,
-			year: currentYear.value,
-			month: currentMonth.value,
-			amount,
-		});
+	try {
+		if (budget.id) {
+			await patchBudget(budget.id, { amount });
+		} else {
+			const existing = await getBudget({ userId, year: currentYear.value, month: currentMonth.value });
+			if (existing.length > 0) {
+				await patchBudget(existing[0].id, { amount });
+			} else {
+				await postBudget({
+					userId,
+					year: currentYear.value,
+					month: currentMonth.value,
+					amount,
+				});
+			}
+		}
+		showBudgetSheet.value = false;
+		await loadChartData();
+	} catch (e) {
+		console.error("예산 저장 실패:", e);
 	}
-	showBudgetSheet.value = false;
-	await loadChartData();
 };
 
 // ── 유틸 ───────────────────────────────────────────────
