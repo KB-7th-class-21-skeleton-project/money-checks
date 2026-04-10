@@ -33,12 +33,16 @@ watch(
 		} else {
 			selectedFriend.value = "1";
 		}
-	}
+	},
 );
+
+const goToCreate = () => {
+	router.push("/account/edit");
+};
 </script>
 
 <template>
-	<div class="w-full px-[16px] pb-[100px]">
+	<div class="w-full px-[16px]">
 		<div class="flex flex-col w-full">
 			<FriendsTap :selectedFriend="selectedFriend" @change-friend="handleFriendChage" />
 			<hr class="bg-gray-200 border-none w-full h-[1px] my-[8px]" />
@@ -55,17 +59,13 @@ watch(
 				:selectedFriend="selectedFriend"
 			/>
 		</div>
-		
-		<!-- 우측 하단 등록(플로팅) 버튼 래퍼 (콘텐츠 영역 기준 위치 고정) -->
-		<div class="fixed bottom-0 left-0 right-0 max-w-[720px] mx-auto w-full pointer-events-none z-50">
-			<router-link
-				to="/account/edit/new"
-				@click.stop
-				class="absolute bottom-[80px] right-[20px] w-[60px] h-[60px] bg-[#F4CF4D] rounded-full flex justify-center items-center shadow-lg transition-transform hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer"
-			>
-				<Plus class="text-white w-[32px] h-[32px]" />
-			</router-link>
-		</div>
+		<!-- Create Account Button -->
+		<button
+			class="fixed bottom-[72px] right-[16px] w-[56px] h-[56px] !rounded-full !bg-primary flex items-center justify-center shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all z-50 cursor-pointer"
+			@click="goToCreate"
+		>
+			<Plus class="text-white" :size="24" :stroke-width="1.5" />
+		</button>
 	</div>
 </template>
 

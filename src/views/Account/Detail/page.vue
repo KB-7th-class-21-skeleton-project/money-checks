@@ -279,9 +279,15 @@ function handleDeleteAccount() {
 }
 
 async function confirmDelete() {
-	await deleteAccount(accountId);
-	showDeleteModal.value = false;
-	router.replace("/account?user=me");
+	try {
+		await deleteAccount(accountId);
+		showDeleteModal.value = false;
+		alert("삭제되었습니다.");
+		router.replace("/account");
+	} catch (err) {
+		console.error("삭제 실패:", err);
+		alert("삭제하는 중 오류가 발생했습니다.");
+	}
 }
 
 const filteredEmojiOptions = computed(() => {
