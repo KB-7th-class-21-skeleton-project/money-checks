@@ -28,14 +28,28 @@ const { mutate: removeFriendMutation } = useMutation({
 	},
 });
 
-const handleRemoveFriend = (friendId) => {
-	if (!me.value) return;
-	const newFriendIds = me.value.friendIds.filter((id) => id !== friendId);
+const isRemoveModalOpen = ref(false);
+const friendToRemove = ref(null);
+
+const confirmRemoveFriend = (friend) => {
+	friendToRemove.value = friend;
+	isRemoveModalOpen.value = true;
+};
+
+const closeRemoveModal = () => {
+	isRemoveModalOpen.value = false;
+	friendToRemove.value = null;
+};
+
+const executeRemoveFriend = () => {
+	if (!me.value || !friendToRemove.value) return;
+	const newFriendIds = me.value.friendIds.filter((id) => id !== friendToRemove.value.id);
 	removeFriendMutation(newFriendIds);
+	closeRemoveModal();
 };
 
 const goToAccount = (friendId) => {
-	router.push(`/account`);
+	router.push({ path: '/account', query: { userId: friendId } });
 };
 
 const isEditing = ref(false);
@@ -139,15 +153,64 @@ const saveEditing = () => {
 						</div>
 					</div>
 					<button
-						class="bg-transparent border-none p-0 outline-none flex items-center justify-center cursor-pointer"
-						@click.stop="handleRemoveFriend(friend.id)"
+						class="bg-transparent border-none p-0 outline-none flex items-center justify-center cursor-pointer text-gray-400 hover:text-gray-900 transition-colors"
+						@click.stop="confirmRemoveFriend(friend)"
 					>
-						<X :size="16" :stroke-width="1" class="text-gray-900" />
+						<X :size="16" :stroke-width="2" />
 					</button>
 				</div>
 			</div>
 		</section>
 	</div>
+
+	<!-- Remove Friend Modal -->
+	<Teleport to="body">
+		<Transition
+			enter-active-class="transition duration-300 ease-out"
+			enter-from-class="opacity-0 scale-95"
+			enter-to-class="opacity-100 scale-100"
+			leave-active-class="transition duration-200 ease-in"
+			leave-from-class="opacity-100 scale-100"
+			leave-to-class="opacity-0 scale-95"
+		>
+			<div v-if="isRemoveModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center px-[24px]">
+				<!-- Backdrop -->
+				<div class="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer transition-opacity" @click="closeRemoveModal"></div>
+				
+				<!-- Modal Content -->
+				<div class="bg-white rounded-2xl w-full max-w-[320px] p-[24px] relative z-10 shadow-2xl flex flex-col gap-[20px]">
+					<button 
+						class="absolute top-[16px] right-[16px] text-gray-400 hover:text-gray-600 transition-colors cursor-pointer" 
+						@click="closeRemoveModal"
+					>
+						<X :size="20" stroke-width="2" />
+					</button>
+					
+					<div class="flex flex-col gap-[8px] mt-[4px]">
+						<h3 class="text-[18px] font-bold text-gray-900">친구 삭제</h3>
+						<p class="text-[14px] text-gray-600 leading-relaxed">
+							정말로 <span class="font-semibold text-gray-900">{{ friendToRemove?.name }}</span>님을 친구 목록에서 삭제하시겠습니까?
+						</p>
+					</div>
+					
+					<div class="flex gap-[8px] mt-[4px] w-full">
+						<button 
+							class="flex-1 py-[8px] !rounded-md bg-gray-100 text-gray-700 text-[13px] font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+							@click="closeRemoveModal"
+						>
+							취소
+						</button>
+						<button 
+							class="flex-1 py-[8px] !rounded-md bg-red-500 text-white text-[13px] font-bold hover:bg-red-600 transition-colors shadow-sm cursor-pointer"
+							@click="executeRemoveFriend"
+						>
+							삭제
+						</button>
+					</div>
+				</div>
+			</div>
+		</Transition>
+	</Teleport>
 </template>
 
 <style scoped></style>

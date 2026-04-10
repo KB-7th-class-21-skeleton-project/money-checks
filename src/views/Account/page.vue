@@ -2,7 +2,11 @@
 import TransactionList from "@/views/Account/components/TransactionList.vue";
 import TransactionFilter from "./components/TransactionFilter.vue";
 import FriendsTap from "./components/FriendsTap.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 const selectedCategory = ref("0");
 const handleCategoryChange = (name) => {
@@ -14,17 +18,29 @@ const handleDateChange = (date) => {
 	selectedDate.value = date;
 };
 
-const selectedFriend = ref("1");
+const selectedFriend = ref(route.query.userId || "1");
 const handleFriendChage = (friendId) => {
 	selectedFriend.value = friendId;
+	router.replace({ ...route, query: { ...route.query, userId: friendId } });
 };
+
+watch(
+	() => route.query.userId,
+	(newUserId) => {
+		if (newUserId) {
+			selectedFriend.value = newUserId;
+		} else {
+			selectedFriend.value = "1";
+		}
+	}
+);
 </script>
 
 <template>
-	<div class="wrapper d-flex justify-content-center min-vh-100 w-100 px-5">
-		<div class="account-header-container"></div>
-		<div class="account-main-container d-flex flex-column w-100">
+	<div class="w-full px-[16px] pb-[100px]">
+		<div class="flex flex-col w-full">
 			<FriendsTap :selectedFriend="selectedFriend" @change-friend="handleFriendChage" />
+			<hr class="bg-gray-200 border-none w-full h-[1px] my-[8px]" />
 			<TransactionFilter
 				:selectedCategory="selectedCategory"
 				:selectedDate="selectedDate"
