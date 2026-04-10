@@ -61,23 +61,29 @@ onMounted(async () => {
 });
 </script>
 <template>
-	<div>
-		<div class="filter-box d-flex gap-2 align-items-center">
-			<span class="rounded px-1.5 py-1.5 d-flex gap-1"
-				><SlidersHorizontal color="grey" /> 필터</span
-			>
-			<div style="background-color: grey; width: 2px; height: 1rem"></div>
+	<div class="filter-wrapper py-3 px-1">
+		<div class="filter-box d-flex gap-3 align-items-center">
+			<div class="filter-label d-flex align-items-center gap-2">
+				<SlidersHorizontal :size="18" class="text-secondary" />
+				<span class="label-text">필터</span>
+			</div>
+
+			<div class="divider"></div>
 
 			<div class="dropdown">
-				<button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+				<button class="chip-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
 					{{
-						selectedDate === "0" ? "기간" : selectedDate === "4" ? "오늘" : selectedDate + "개월"
+						selectedDate === "0"
+							? "전체 기간"
+							: selectedDate === "4"
+								? "오늘"
+								: selectedDate + "개월"
 					}}
 				</button>
-				<ul class="dropdown-menu shadow border-0 rounded-4 p-2">
+				<ul class="dropdown-menu custom-dropdown shadow-lg border-0 rounded-4 p-2">
 					<li
 						v-for="d in [
-							{ n: '전체', v: '0' },
+							{ n: '전체 기간', v: '0' },
 							{ n: '1개월', v: '1' },
 							{ n: '2개월', v: '2' },
 							{ n: '3개월', v: '3' },
@@ -86,81 +92,143 @@ onMounted(async () => {
 						:key="d.v"
 					>
 						<button
-							class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3"
+							class="dropdown-item py-2 px-3"
 							:class="{ 'active-item': selectedDate === d.v }"
 							@click="onSelectDate(d.v)"
 						>
-							<span>{{ d.n }}</span>
+							{{ d.n }}
 						</button>
 					</li>
 				</ul>
 			</div>
 
 			<div class="dropdown">
-				<button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-					{{ selectedCategory === "0" ? "카테고리" : selectedCategory }}
+				<button class="chip-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+					{{ selectedCategory === "0" ? "모든 카테고리" : selectedCategory }}
 				</button>
-				<ul class="dropdown-menu shadow border-0 rounded-4 p-2">
-					<li>
-						<button class="dropdown-item py-2 px-3" @click="onSelectCategory('0')">
-							<div class="d-flex align-items-center gap-2"><Dog :size="18" />전체</div>
+				<ul class="dropdown-menu category-grid custom-dropdown shadow-lg border-0 rounded-4 p-2">
+					<li class="grid-full">
+						<button
+							class="dropdown-item py-2 px-3"
+							:class="{ 'active-item': selectedCategory === '0' }"
+							@click="onSelectCategory('0')"
+						>
+							<div class="d-flex align-items-center gap-2"><Dog :size="16" /> 전체</div>
 						</button>
 					</li>
 					<li v-for="(c, index) in categories.item" :key="c.id">
 						<button
-							class="dropdown-item d-flex justify-content-between align-items-center py-3 px-3"
+							class="dropdown-item py-2 px-3"
 							:class="{ 'active-item': selectedCategory === c.name }"
 							@click="onSelectCategory(c.name)"
 						>
-							<div class="d-flex align-items-center gap-2">
-								<component :is="icon[index]" :size="18"></component>
-								{{ c.name }}
+							<div class="d-flex align-items-center gap-2 text-truncate">
+								<component :is="icon[index]" :size="16"></component>
+								<span>{{ c.name }}</span>
 							</div>
 						</button>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<hr class="mt-2 mb-0" />
 	</div>
 </template>
 
 <style scoped>
-.filter-btn {
-	background-color: none;
-	border: none;
-	font-size: 1rem;
-	font-width: 700;
-	color: #343a40;
-	padding: 0.5rem;
+.filter-wrapper {
+	background-color: transparent;
+}
+
+.filter-label {
+	padding: 6px 4px;
+}
+
+.label-text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #6c757d;
+}
+
+.divider {
+	width: 1px;
+	height: 14px;
+	background-color: #dee2e6;
+}
+
+/* 🏆 필터 버튼(칩) 스타일 */
+.chip-btn {
+	background-color: #f1f3f5;
+	border: 1px solid transparent;
+	border-radius: 5px; /* 알약 형태 */
+	font-size: 16px;
+	font-weight: 500;
+	color: #495057;
+	padding: 6px 14px;
+	transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+	background-color: #e9ecef;
+}
+
+.chip-btn.dropdown-toggle::after {
+	margin-left: 8px;
+	vertical-align: middle;
+	color: #adb5bd;
+}
+
+/* 🏆 드롭다운 공통 스타일 */
+.custom-dropdown {
+	margin-top: 8px !important;
+	animation: fadeIn 0.2s ease-out;
+}
+
+.dropdown-item:focus {
+	background-color: #fff9db !important; /* 누르는 순간에도 노란색 고정 */
+	box-shadow: none !important; /* 파란색 그림자 제거 */
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .dropdown-item {
+	font-size: 14px;
+	color: #495057;
 	border-radius: 8px;
-	color: #adb5bd; /* 비활성 상태: 연한 회색 */
-	font-weight: 500;
-	transition: all 0.2s;
+	margin: 2px 0;
 }
 
-/* 마우스 올렸을 때 */
-.dropdown-item:hover {
-	background-color: #f8f9fa;
-	color: #343a40;
-}
-
-/* 선택된 상태 스타일 (이미지처럼 진하게) */
 .active-item {
-	color: #343a40 !important;
-	background-color: transparent !important;
+	background-color: #fff9db !important; /* 훨씬 연하고 우유빛 도는 노란색 */
+	color: black !important; /* 포인트가 되는 오렌지-노랑 텍스트 */
+	font-weight: 600;
+	border-radius: 8px; /* 살짝 둥글게 하면 더 부드러워 보여요 */
 }
 
-/* 체크 아이콘 색상 */
-.lucide-check {
-	color: #343a40;
+/* 카테고리 그리드 전용 */
+.category-grid.show {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr);
+	min-width: 280px;
+	gap: 2px;
 }
 
-/* 모든 리스트 사이 구간 나누기 */
-li:not(:last-child) {
+.grid-full {
+	/* grid-column: span 2; */
 	border-bottom: 1px solid #f1f3f5;
+	margin-bottom: 4px;
+}
+
+/* 부트스트랩 기본 밑줄 제거 */
+li:not(:last-child) {
+	border-bottom: none;
 }
 </style>

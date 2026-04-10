@@ -1,7 +1,8 @@
 <script setup>
-import { computed, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, watch } from "vue";
 import TransactionItem from "./TransactionItem.vue";
 import { getAccounts } from "@/api/account.js";
+import { useRoute, useRouter } from "vue-router";
 
 const props = defineProps({
 	currentCategory: {
@@ -12,13 +13,29 @@ const props = defineProps({
 		type: String,
 		default: "0",
 	},
+	selectedFriend: {
+		type: String,
+		default: "1",
+	},
 });
-const transaction = reactive({ item: [] });
 
-onMounted(async () => {
-	const res = await getAccounts("1");
+const transaction = reactive({ item: [] });
+const router = useRouter();
+const route = useRoute();
+
+const fetchAccountData = async () => {
+	const res = await getAccounts(props.selectedFriend);
 	transaction.item = res;
-});
+};
+
+onMounted(fetchAccountData);
+
+watch(
+	() => props.selectedFriend,
+	() => {
+		fetchAccountData();
+	},
+);
 
 const filteredTransaction = computed(() => {
 	const now = new Date();
@@ -70,6 +87,10 @@ const formattedDate = (originalDate) => {
 	const day = dateObj.getDate();
 	return `${month}.${day}`;
 };
+
+const clickTransactionHandler = (id) => {
+	router.push({ name: "AccountDetail", params: { id } });
+};
 </script>
 
 <template>
@@ -81,13 +102,29 @@ const formattedDate = (originalDate) => {
 		>
 			<div class="trasaction-date py-2">{{ formattedDate(group.date) }}</div>
 			<div class="d-flex flex-column w-100">
-				<TransactionItem v-for="t in group.list" :key="t.id" :transaction="t"> </TransactionItem>
+				<TransactionItem
+					class="transaction-item-list"
+					v-for="t in group.list"
+					:key="t.id"
+					:transaction="t"
+					@click.stop="clickTransactionHandler(t.id)"
+				>
+				</TransactionItem>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
+.transaction-item-list {
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border-radius: 8px;
+}
+.transaction-item-list:hover {
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* 은은한 그림자 */
+}
 .trasaction-date {
 	font-size: 1.2rem;
 	font-weight: 700;

@@ -33,10 +33,8 @@ const props = defineProps({
 		<div class="transaction-wrap d-flex flex-column grow-1">
 			<div class="transaction-title d-flex justify-content-between align-items-center">
 				<span class="title-content">{{ transaction.content }}</span>
-				<span
-					class="transaction-amount"
-					:class="Number(transaction.amount) > 0 ? 'amount-plus' : ''"
-					>{{ transaction.amount }}원</span
+				<span class="transaction-amount" :class="transaction.type == 'in' ? 'amount-plus' : ''"
+					><span v-if="transaction.type == 'out'">-</span>{{ transaction.amount }}원</span
 				>
 			</div>
 			<div class="transaction-content d-flex justify-content-between mt-1">
