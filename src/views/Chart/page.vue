@@ -187,7 +187,10 @@
 					class="sheet-input"
 					v-model.number="budgetInput"
 					placeholder="0"
+					min="1"
+					step="1"
 					autofocus
+					@keydown="(e) => ['-', '+', '.', 'e'].includes(e.key) && e.preventDefault()"
 				/>
 				<span class="sheet-unit">원</span>
 			</div>
