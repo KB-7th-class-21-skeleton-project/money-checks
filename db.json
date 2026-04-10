@@ -265,14 +265,6 @@
       "id": "bw0yaeCkFcI"
     }
   ],
-  "budget": [
-    {
-      "userId": 1,
-      "year": 2026,
-      "month": 4,
-      "amount": 21,
-      "id": "vmxyNy9fUJ0"
-    }
-  ],
+  "budget": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
