@@ -374,6 +374,7 @@ const donutSegments = computed(() => {
 });
 
 // ── 월 네비게이션 ──────────────────────────────────────
+
 const currentMonthLabel = computed(() => `${currentYear.value}년 ${currentMonth.value}월`);
 
 const prevMonth = () => {
@@ -421,6 +422,7 @@ const saveBudget = async () => {
 		if (budget.id) {
 			await patchBudget(budget.id, { amount });
 		} else {
+
 			const existing = await getBudget({
 				userId,
 				year: currentYear.value,
@@ -491,6 +493,7 @@ const dailyExpense = computed(() => {
 	font-size: 16px;
 	font-weight: 600;
 	color: black;
+
 	min-width: 120px;
 	text-align: center;
 }
