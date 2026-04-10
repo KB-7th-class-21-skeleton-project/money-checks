@@ -2,7 +2,6 @@
 import { useRoute, useRouter } from "vue-router";
 import { reactive, onMounted, computed, ref } from "vue";
 import { useAccountStore } from "@/stores/account";
-import axios from "axios";
 import CategorySelect from "./components/CategorySelect.vue";
 import AccountHeader from "../Detail/AccountHeader.vue";
 import ToggleSwitch from "./components/ToggleSwitch.vue";
@@ -36,7 +35,7 @@ const formData = reactive({
 	content: "",
 	memo: "",
 	type: "out", //디폴트 지출
-	userId: 1,
+	id: accountStore.id,
 	isPublic: true, //공개여부 디폴트 공개
 });
 
@@ -91,7 +90,10 @@ onMounted(loadData);
 
 <template>
 	<div class="page-container">
-		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="router.back()" />
+		<AccountHeader
+			:title="formData.type === 'in' ? '수입' : '지출'"
+			@back="router.push(`/account/${formData.id}`)"
+		/>
 
 		<div class="type-tap-group">
 			<div class="tabs">
