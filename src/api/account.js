@@ -82,3 +82,23 @@ export const createReaction = (data) => api.post("/reactions", data);
 
 // 리액션 삭제
 export const deleteReaction = (id) => api.delete(`/reactions/${id}`);
+
+// 예산 조회
+export const getBudget = async ({ userId, year, month }) => {
+	const all = await api.get("/budget");
+	return all.filter(
+		(b) =>
+			String(b.userId) === String(userId) &&
+			Number(b.year) === Number(year) &&
+			Number(b.month) === Number(month),
+	);
+};
+
+// 예산 생성
+export const postBudget = (data) => api.post("/budget", data);
+
+// 예산 수정
+export const patchBudget = (id, data) => api.patch(`/budget/${id}`, data);
+
+// 예산 삭제
+export const deleteBudget = (id) => api.delete(`/budget/${id}`);
