@@ -68,9 +68,13 @@
 							</template>
 						</p>
 						<div class="budget-detail-list">
-							<div class="budget-detail-row">
+							<div v-if="budget.remaining >= 0" class="budget-detail-row">
 								<span class="budget-detail-label">하루 권장 예산</span>
 								<span class="budget-detail-value">{{ formatWon(dailyBudget) }}</span>
+							</div>
+							<div class="budget-detail-row">
+								<span class="budget-detail-label">하루 평균 지출</span>
+								<span class="budget-detail-value">{{ formatWon(dailyExpense) }}</span>
 							</div>
 							<div class="budget-detail-row">
 								<span class="budget-detail-label">총 예산</span>
@@ -409,6 +413,16 @@ const dailyBudget = computed(() => {
 	if (!budget.total) return 0;
 	const daysInMonth = new Date(currentYear.value, currentMonth.value, 0).getDate();
 	return Math.round(budget.total / daysInMonth);
+});
+
+const dailyExpense = computed(() => {
+	const today = new Date();
+	const isCurrentMonth =
+		today.getFullYear() === currentYear.value && today.getMonth() + 1 === currentMonth.value;
+	const elapsedDays = isCurrentMonth
+		? today.getDate()
+		: new Date(currentYear.value, currentMonth.value, 0).getDate();
+	return elapsedDays > 0 ? Math.round(summary.expense / elapsedDays) : 0;
 });
 </script>
 
