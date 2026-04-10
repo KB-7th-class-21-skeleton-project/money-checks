@@ -1,469 +1,478 @@
 {
-  "me": {
-    "id": "1",
-    "name": "안유진짱",
-    "email": "kb@example.com",
-    "profileUrl": "/images/profiles/me.png",
-    "friendIds": [
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ]
-  },
-  "users": [
-    {
-      "id": "2",
-      "name": "박토스",
-      "email": "toss@example.com",
-      "profileUrl": "/images/profiles/p2.png"
-    },
-    {
-      "id": "3",
-      "name": "이신한",
-      "email": "shinhan@example.com",
-      "profileUrl": "/images/profiles/p3.png"
-    },
-    {
-      "id": "4",
-      "name": "김우리",
-      "email": "woori@example.com",
-      "profileUrl": "/images/profiles/p4.png"
-    },
-    {
-      "id": "5",
-      "name": "최하나",
-      "email": "hana@example.com",
-      "profileUrl": "/images/profiles/p5.png"
-    },
-    {
-      "id": "6",
-      "name": "정농협",
-      "email": "nh@example.com",
-      "profileUrl": "/images/profiles/p6.png"
-    },
-    {
-      "id": "7",
-      "name": "강카카오",
-      "email": "kakao@example.com",
-      "profileUrl": "/images/profiles/p7.png"
-    },
-    {
-      "id": "8",
-      "name": "윤케이뱅크",
-      "email": "kbank@example.com",
-      "profileUrl": "/images/profiles/p8.png"
-    },
-    {
-      "id": "9",
-      "name": "임새마을",
-      "email": "kfcc@example.com",
-      "profileUrl": "/images/profiles/p9.png"
-    },
-    {
-      "id": "10",
-      "name": "조우체국",
-      "email": "post@example.com",
-      "profileUrl": "/images/profiles/p10.png"
-    }
-  ],
-  "account": [
-    {
-      "date": "2026-04-01",
-      "time": "14:30",
-      "amount": 4500,
-      "category": "카페",
-      "content": "스타벅스 강남점",
-      "memo": "아이스 아메리카노",
-      "type": "out",
-      "userId": "1",
-      "isPublic": true,
-      "id": "101",
-      "bankName": "KB국민은행"
-    },
-    {
-      "id": "102",
-      "userId": "2",
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "식비",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "103",
-      "userId": "1",
-      "date": "2026-04-08",
-      "time": "12:30",
-      "bankName": "KB국민은행",
-      "content": "맥도날드",
-      "category": "식비",
-      "amount": 8500,
-      "type": "out",
-      "memo": "빅맥 세트",
-      "isPublic": true
-    },
-    {
-      "id": "104",
-      "userId": "1",
-      "date": "2026-04-09",
-      "time": "09:00",
-      "bankName": "KB국민은행",
-      "content": "지하철",
-      "category": "교통",
-      "amount": 1400,
-      "type": "out",
-      "memo": "출근",
-      "isPublic": true
-    },
-    {
-      "id": "105",
-      "userId": "3",
-      "date": "2026-04-06",
-      "time": "20:00",
-      "bankName": "신한은행",
-      "content": "CGV",
-      "category": "문화/여가",
-      "amount": 15000,
-      "type": "out",
-      "memo": "영화 관람"
-    },
-    {
-      "id": "106",
-      "userId": "1",
-      "date": "2026-04-09",
-      "time": "19:00",
-      "bankName": "KB국민은행",
-      "content": "지하철",
-      "category": "교통",
-      "amount": 1400,
-      "type": "out",
-      "memo": "퇴근",
-      "isPublic": true
-    },
-    {
-      "id": "107",
-      "userId": "4",
-      "date": "2026-04-05",
-      "time": "13:00",
-      "bankName": "우리은행",
-      "content": "올리브영",
-      "category": "쇼핑",
-      "amount": 32000,
-      "type": "out",
-      "memo": "화장품 구매"
-    },
-    {
-      "id": "108",
-      "userId": "1",
-      "date": "2026-04-02",
-      "time": "10:00",
-      "bankName": "KB국민은행",
-      "content": "월급",
-      "category": "급여",
-      "amount": 3000000,
-      "type": "in",
-      "memo": "4월 급여",
-      "isPublic": true
-    },
-    {
-      "id": "109",
-      "userId": "2",
-      "date": "2026-04-08",
-      "time": "08:30",
-      "bankName": "카카오뱅크",
-      "content": "메가커피",
-      "category": "카페",
-      "amount": 2000,
-      "type": "out",
-      "memo": "아메리카노"
-    },
-    {
-      "id": "110",
-      "userId": "5",
-      "date": "2026-04-09",
-      "time": "14:00",
-      "bankName": "하나은행",
-      "content": "약국",
-      "category": "건강",
-      "amount": 5000,
-      "type": "out",
-      "memo": "감기약"
-    },
-    {
-      "id": "111",
-      "userId": "1",
-      "date": "2026-03-25",
-      "time": "19:30",
-      "bankName": "KB국민은행",
-      "content": "쿠팡",
-      "category": "쇼핑",
-      "amount": 45000,
-      "type": "out",
-      "memo": "생필품 주문",
-      "isPublic": true
-    },
-    {
-      "id": "112",
-      "userId": "1",
-      "date": "2026-03-28",
-      "time": "12:00",
-      "bankName": "KB국민은행",
-      "content": "김밥천국",
-      "category": "식비",
-      "amount": 7000,
-      "type": "out",
-      "memo": "점심 식사",
-      "isPublic": true
-    },
-    {
-      "id": "113",
-      "userId": "6",
-      "date": "2026-04-10",
-      "time": "11:00",
-      "bankName": "농협은행",
-      "content": "용돈",
-      "category": "용돈",
-      "amount": 100000,
-      "type": "in",
-      "memo": "어머니가 주심"
-    },
-    {
-      "id": "114",
-      "userId": "1",
-      "date": "2026-04-07",
-      "time": "22:00",
-      "bankName": "KB국민은행",
-      "content": "넷플릭스",
-      "category": "문화/여가",
-      "amount": 17000,
-      "type": "out",
-      "memo": "구독료 결제",
-      "isPublic": true
-    },
-    {
-      "id": "115",
-      "userId": "7",
-      "date": "2026-04-04",
-      "time": "15:30",
-      "bankName": "카카오뱅크",
-      "content": "택시",
-      "category": "교통",
-      "amount": 12000,
-      "type": "out",
-      "memo": "늦어서 택시탐"
-    },
-    {
-      "id": "116",
-      "userId": "1",
-      "date": "2026-04-10",
-      "time": "08:15",
-      "bankName": "KB국민은행",
-      "content": "파리바게뜨",
-      "category": "식비",
-      "amount": 6500,
-      "type": "out",
-      "memo": "아침 샌드위치",
-      "isPublic": true
-    },
-    {
-      "id": "117",
-      "userId": "8",
-      "date": "2026-04-01",
-      "time": "10:00",
-      "bankName": "케이뱅크",
-      "content": "적금 이자",
-      "category": "금융수입",
-      "amount": 15000,
-      "type": "in",
-      "memo": "만기 이자율"
-    },
-    {
-      "id": "118",
-      "userId": "1",
-      "date": "2026-03-15",
-      "time": "18:30",
-      "bankName": "KB국민은행",
-      "content": "무신사",
-      "category": "쇼핑",
-      "amount": 78000,
-      "type": "out",
-      "memo": "봄 자켓 구매",
-      "isPublic": false
-    },
-    {
-      "id": "119",
-      "userId": "3",
-      "date": "2026-04-09",
-      "time": "12:15",
-      "bankName": "신한은행",
-      "content": "회사 식당",
-      "category": "식비",
-      "amount": 6000,
-      "type": "out",
-      "memo": "오늘 메뉴 맛없음"
-    },
-    {
-      "id": "120",
-      "userId": "1",
-      "date": "2026-04-03",
-      "time": "14:00",
-      "bankName": "KB국민은행",
-      "content": "편의점",
-      "category": "식비",
-      "amount": 3500,
-      "type": "out",
-      "memo": "과자랑 음료수",
-      "isPublic": true
-    }
-  ],
-  "categories": [
-    {
-      "id": "1",
-      "type": "out",
-      "name": "식비",
-      "icon": "🍔"
-    },
-    {
-      "id": "2",
-      "type": "out",
-      "name": "카페",
-      "icon": "☕"
-    },
-    {
-      "id": "3",
-      "type": "out",
-      "name": "교통",
-      "icon": "🚌"
-    },
-    {
-      "id": "4",
-      "type": "out",
-      "name": "쇼핑",
-      "icon": "🛒"
-    },
-    {
-      "id": "5",
-      "type": "out",
-      "name": "문화/여가",
-      "icon": "🎬"
-    },
-    {
-      "id": "6",
-      "type": "out",
-      "name": "건강",
-      "icon": "💊"
-    },
-    {
-      "id": "8",
-      "type": "in",
-      "name": "급여",
-      "icon": "💰"
-    },
-    {
-      "id": "9",
-      "type": "in",
-      "name": "용돈",
-      "icon": "💵"
-    },
-    {
-      "id": "10",
-      "type": "in",
-      "name": "금융수입",
-      "icon": "📈"
-    },
-    {
-      "id": "11",
-      "type": "in",
-      "name": "기타",
-      "icon": "🎁"
-    }
-  ],
-  "comments": [
-    {
-      "id": "1",
-      "accountId": "102",
-      "userId": "3",
-      "content": "치킨 맛있겠네요!",
-      "createdAt": "2026-04-07T18:05:00Z",
-      "parentCommentId": null
-    },
-    {
-      "id": "2",
-      "accountId": "102",
-      "userId": "1",
-      "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
-      "createdAt": "2026-04-07T18:05:00Z",
-      "parentCommentId": null
-    },
-    {
-      "id": "3",
-      "accountId": "101",
-      "userId": "1",
-      "content": "나도 커피 마시고 싶다",
-      "createdAt": "2026-04-01T06:36:05Z",
-      "parentCommentId": null
-    },
-    {
-      "userId": "1",
-      "accountId": "102",
-      "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
-      "createdAt": "2026-04-09T04:34:54.964Z",
-      "parentCommentId": "2",
-      "id": "YBkx_rwx43Q"
-    }
-  ],
-  "reactions": [
-    {
-      "id": "1",
-      "userId": "2",
-      "accountId": "102",
-      "emoji": "👍"
-    },
-    {
-      "id": "2",
-      "userId": "1",
-      "accountId": "102",
-      "emoji": "☺️"
-    },
-    {
-      "id": "3",
-      "userId": "1",
-      "accountId": "101",
-      "emoji": "😢"
-    },
-    {
-      "userId": "1",
-      "accountId": "101",
-      "emoji": "👍",
-      "id": "TsIgDdWrSbE"
-    },
-    {
-      "userId": "1",
-      "accountId": "101",
-      "emoji": "👎",
-      "id": "uN0nPJD6R4c"
-    },
-    {
-      "userId": "1",
-      "accountId": "102",
-      "emoji": "👎",
-      "id": "vcQigHoWKFk"
-    },
-    {
-      "userId": "1",
-      "accountId": "102",
-      "emoji": "😮",
-      "id": "bw0yaeCkFcI"
-    }
-  ],
-  "budget": [],
-  "$schema": "./node_modules/json-server/schema.json"
+	"me": {
+		"id": "1",
+		"name": "안유진짱",
+		"email": "kb@example.com",
+		"profileUrl": "/images/profiles/me.png",
+		"friendIds": [
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"10"
+		]
+	},
+	"users": [
+		{
+			"id": "2",
+			"name": "박토스",
+			"email": "toss@example.com",
+			"profileUrl": "/images/profiles/p2.png"
+		},
+		{
+			"id": "3",
+			"name": "이신한",
+			"email": "shinhan@example.com",
+			"profileUrl": "/images/profiles/p3.png"
+		},
+		{
+			"id": "4",
+			"name": "김우리",
+			"email": "woori@example.com",
+			"profileUrl": "/images/profiles/p4.png"
+		},
+		{
+			"id": "5",
+			"name": "최하나",
+			"email": "hana@example.com",
+			"profileUrl": "/images/profiles/p5.png"
+		},
+		{
+			"id": "6",
+			"name": "정농협",
+			"email": "nh@example.com",
+			"profileUrl": "/images/profiles/p6.png"
+		},
+		{
+			"id": "7",
+			"name": "강카카오",
+			"email": "kakao@example.com",
+			"profileUrl": "/images/profiles/p7.png"
+		},
+		{
+			"id": "8",
+			"name": "윤케이뱅크",
+			"email": "kbank@example.com",
+			"profileUrl": "/images/profiles/p8.png"
+		},
+		{
+			"id": "9",
+			"name": "임새마을",
+			"email": "kfcc@example.com",
+			"profileUrl": "/images/profiles/p9.png"
+		},
+		{
+			"id": "10",
+			"name": "조우체국",
+			"email": "post@example.com",
+			"profileUrl": "/images/profiles/p10.png"
+		}
+	],
+	"account": [
+		{
+			"date": "2026-04-01",
+			"time": "14:30",
+			"amount": 4500,
+			"category": "카페",
+			"content": "스타벅스 강남점",
+			"memo": "아이스 아메리카노",
+			"type": "out",
+			"userId": "1",
+			"isPublic": true,
+			"id": "101",
+			"bankName": "KB국민은행"
+		},
+		{
+			"id": "102",
+			"userId": "2",
+			"date": "2026-04-07",
+			"time": "18:00",
+			"bankName": "카카오뱅크",
+			"content": "배달의민족",
+			"category": "식비",
+			"amount": 25000,
+			"type": "out",
+			"memo": "저녁은 치킨!",
+			"isPublic": true
+		},
+		{
+			"id": "103",
+			"userId": "1",
+			"date": "2026-04-08",
+			"time": "12:30",
+			"bankName": "KB국민은행",
+			"content": "맥도날드",
+			"category": "식비",
+			"amount": 8500,
+			"type": "out",
+			"memo": "빅맥 세트",
+			"isPublic": true
+		},
+		{
+			"id": "104",
+			"userId": "1",
+			"date": "2026-04-09",
+			"time": "09:00",
+			"bankName": "KB국민은행",
+			"content": "지하철",
+			"category": "교통",
+			"amount": 1400,
+			"type": "out",
+			"memo": "출근",
+			"isPublic": true
+		},
+		{
+			"id": "105",
+			"userId": "3",
+			"date": "2026-04-06",
+			"time": "20:00",
+			"bankName": "신한은행",
+			"content": "CGV",
+			"category": "문화/여가",
+			"amount": 15000,
+			"type": "out",
+			"memo": "영화 관람",
+			"isPublic": true
+		},
+		{
+			"id": "106",
+			"userId": "1",
+			"date": "2026-04-09",
+			"time": "19:00",
+			"bankName": "KB국민은행",
+			"content": "지하철",
+			"category": "교통",
+			"amount": 1400,
+			"type": "out",
+			"memo": "퇴근",
+			"isPublic": true
+		},
+		{
+			"id": "107",
+			"userId": "4",
+			"date": "2026-04-05",
+			"time": "13:00",
+			"bankName": "우리은행",
+			"content": "올리브영",
+			"category": "쇼핑",
+			"amount": 32000,
+			"type": "out",
+			"memo": "화장품 구매",
+			"isPublic": true
+		},
+		{
+			"id": "108",
+			"userId": "1",
+			"date": "2026-04-02",
+			"time": "10:00",
+			"bankName": "KB국민은행",
+			"content": "월급",
+			"category": "급여",
+			"amount": 3000000,
+			"type": "in",
+			"memo": "4월 급여",
+			"isPublic": true
+		},
+		{
+			"id": "109",
+			"userId": "2",
+			"date": "2026-04-08",
+			"time": "08:30",
+			"bankName": "카카오뱅크",
+			"content": "메가커피",
+			"category": "카페",
+			"amount": 2000,
+			"type": "out",
+			"memo": "아메리카노",
+			"isPublic": true
+		},
+		{
+			"id": "110",
+			"userId": "5",
+			"date": "2026-04-09",
+			"time": "14:00",
+			"bankName": "하나은행",
+			"content": "약국",
+			"category": "건강",
+			"amount": 5000,
+			"type": "out",
+			"memo": "감기약",
+			"isPublic": true
+		},
+		{
+			"id": "111",
+			"userId": "1",
+			"date": "2026-03-25",
+			"time": "19:30",
+			"bankName": "KB국민은행",
+			"content": "쿠팡",
+			"category": "쇼핑",
+			"amount": 45000,
+			"type": "out",
+			"memo": "생필품 주문",
+			"isPublic": true
+		},
+		{
+			"id": "112",
+			"userId": "1",
+			"date": "2026-03-28",
+			"time": "12:00",
+			"bankName": "KB국민은행",
+			"content": "김밥천국",
+			"category": "식비",
+			"amount": 7000,
+			"type": "out",
+			"memo": "점심 식사",
+			"isPublic": true
+		},
+		{
+			"id": "113",
+			"userId": "6",
+			"date": "2026-04-10",
+			"time": "11:00",
+			"bankName": "농협은행",
+			"content": "용돈",
+			"category": "용돈",
+			"amount": 100000,
+			"type": "in",
+			"memo": "어머니가 주심",
+			"isPublic": true
+		},
+		{
+			"id": "114",
+			"userId": "1",
+			"date": "2026-04-07",
+			"time": "22:00",
+			"bankName": "KB국민은행",
+			"content": "넷플릭스",
+			"category": "문화/여가",
+			"amount": 17000,
+			"type": "out",
+			"memo": "구독료 결제",
+			"isPublic": true
+		},
+		{
+			"id": "115",
+			"userId": "7",
+			"date": "2026-04-04",
+			"time": "15:30",
+			"bankName": "카카오뱅크",
+			"content": "택시",
+			"category": "교통",
+			"amount": 12000,
+			"type": "out",
+			"memo": "늦어서 택시탐",
+			"isPublic": true
+		},
+		{
+			"id": "116",
+			"userId": "1",
+			"date": "2026-04-10",
+			"time": "08:15",
+			"bankName": "KB국민은행",
+			"content": "파리바게뜨",
+			"category": "식비",
+			"amount": 6500,
+			"type": "out",
+			"memo": "아침 샌드위치",
+			"isPublic": true
+		},
+		{
+			"id": "117",
+			"userId": "8",
+			"date": "2026-04-01",
+			"time": "10:00",
+			"bankName": "케이뱅크",
+			"content": "적금 이자",
+			"category": "금융수입",
+			"amount": 15000,
+			"type": "in",
+			"memo": "만기 이자율",
+			"isPublic": true
+		},
+		{
+			"id": "118",
+			"userId": "1",
+			"date": "2026-03-15",
+			"time": "18:30",
+			"bankName": "KB국민은행",
+			"content": "무신사",
+			"category": "쇼핑",
+			"amount": 78000,
+			"type": "out",
+			"memo": "봄 자켓 구매",
+			"isPublic": false
+		},
+		{
+			"id": "119",
+			"userId": "3",
+			"date": "2026-04-09",
+			"time": "12:15",
+			"bankName": "신한은행",
+			"content": "회사 식당",
+			"category": "식비",
+			"amount": 6000,
+			"type": "out",
+			"memo": "오늘 메뉴 맛없음",
+			"isPublic": true
+		},
+		{
+			"id": "120",
+			"userId": "1",
+			"date": "2026-04-03",
+			"time": "14:00",
+			"bankName": "KB국민은행",
+			"content": "편의점",
+			"category": "식비",
+			"amount": 3500,
+			"type": "out",
+			"memo": "과자랑 음료수",
+			"isPublic": true
+		}
+	],
+	"categories": [
+		{
+			"id": "1",
+			"type": "out",
+			"name": "식비",
+			"icon": "🍔"
+		},
+		{
+			"id": "2",
+			"type": "out",
+			"name": "카페",
+			"icon": "☕"
+		},
+		{
+			"id": "3",
+			"type": "out",
+			"name": "교통",
+			"icon": "🚌"
+		},
+		{
+			"id": "4",
+			"type": "out",
+			"name": "쇼핑",
+			"icon": "🛒"
+		},
+		{
+			"id": "5",
+			"type": "out",
+			"name": "문화/여가",
+			"icon": "🎬"
+		},
+		{
+			"id": "6",
+			"type": "out",
+			"name": "건강",
+			"icon": "💊"
+		},
+		{
+			"id": "8",
+			"type": "in",
+			"name": "급여",
+			"icon": "💰"
+		},
+		{
+			"id": "9",
+			"type": "in",
+			"name": "용돈",
+			"icon": "💵"
+		},
+		{
+			"id": "10",
+			"type": "in",
+			"name": "금융수입",
+			"icon": "📈"
+		},
+		{
+			"id": "11",
+			"type": "in",
+			"name": "기타",
+			"icon": "🎁"
+		}
+	],
+	"comments": [
+		{
+			"id": "1",
+			"accountId": "102",
+			"userId": "3",
+			"content": "치킨 맛있겠네요!",
+			"createdAt": "2026-04-07T18:05:00Z",
+			"parentCommentId": null
+		},
+		{
+			"id": "2",
+			"accountId": "102",
+			"userId": "1",
+			"content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
+			"createdAt": "2026-04-07T18:05:00Z",
+			"parentCommentId": null
+		},
+		{
+			"id": "3",
+			"accountId": "101",
+			"userId": "1",
+			"content": "나도 커피 마시고 싶다",
+			"createdAt": "2026-04-01T06:36:05Z",
+			"parentCommentId": null
+		},
+		{
+			"userId": "1",
+			"accountId": "102",
+			"content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
+			"createdAt": "2026-04-09T04:34:54.964Z",
+			"parentCommentId": "2",
+			"id": "YBkx_rwx43Q"
+		}
+	],
+	"reactions": [
+		{
+			"id": "1",
+			"userId": "2",
+			"accountId": "102",
+			"emoji": "👍"
+		},
+		{
+			"id": "2",
+			"userId": "1",
+			"accountId": "102",
+			"emoji": "☺️"
+		},
+		{
+			"id": "3",
+			"userId": "1",
+			"accountId": "101",
+			"emoji": "😢"
+		},
+		{
+			"userId": "1",
+			"accountId": "101",
+			"emoji": "👍",
+			"id": "TsIgDdWrSbE"
+		},
+		{
+			"userId": "1",
+			"accountId": "101",
+			"emoji": "👎",
+			"id": "uN0nPJD6R4c"
+		},
+		{
+			"userId": "1",
+			"accountId": "102",
+			"emoji": "👎",
+			"id": "vcQigHoWKFk"
+		},
+		{
+			"userId": "1",
+			"accountId": "102",
+			"emoji": "😮",
+			"id": "bw0yaeCkFcI"
+		}
+	],
+	"budget": [],
+	"$schema": "./node_modules/json-server/schema.json"
 }

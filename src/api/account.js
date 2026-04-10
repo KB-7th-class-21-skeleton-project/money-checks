@@ -12,8 +12,12 @@ export const getMe = () => api.get("/me");
  * @returns {Promise<Array>} 거래 내역 배열
  */
 export const getAccounts = async (userId) => {
-	const all = await api.get("/account");
-	return all.filter((a) => String(a.userId) === String(userId));
+	const [all, me] = await Promise.all([api.get("/account"), getMe()]);
+	return all.filter((a) => {
+		if (String(a.userId) !== String(userId)) return false;
+		if (String(userId) === String(me.id)) return true;
+		return a.isPublic !== false;
+	});
 };
 
 /**
