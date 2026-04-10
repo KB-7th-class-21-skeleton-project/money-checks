@@ -30,13 +30,13 @@ const getTime = () => {
 const formData = reactive({
 	date: getToday(),
 	time: getTime(),
-	amount: 0,
+	amount: "",
 	category: "",
 	content: "",
 	memo: "",
 	type: "out", //디폴트 지출
-	id: accountStore.id,
 	isPublic: true, //공개여부 디폴트 공개
+	userId: "1", // 로그인된 유저(본인)
 });
 
 const isEditMode = computed(() => !!accountId && accountId !== "new");
@@ -54,15 +54,47 @@ const loadData = async () => {
 	}
 };
 
+const goBack = () => {
+	if (window.history.state.back) {
+		router.back();
+	} else {
+		router.replace(`/account/${accountId}`);
+	}
+};
+
+const toastMessage = ref("");
+const showToast = ref(false);
+
+const displayToast = (msg) => {
+	toastMessage.value = msg;
+	showToast.value = true;
+	setTimeout(() => {
+		showToast.value = false;
+	}, 2000);
+};
+
 const handleSubmit = async () => {
+	if (!formData.amount || formData.amount === 0) {
+		displayToast("금액을 입력해 주세요.");
+		return;
+	}
+	if (!formData.category || formData.category === "0" || formData.category === "") {
+		displayToast("카테고리를 선택해 주세요.");
+		return;
+	}
+	if (!formData.content || formData.content.trim() === "") {
+		displayToast("내용을 입력해 주세요.");
+		return;
+	}
+
 	try {
-		//store의 save 액션
 		const targetId = accountId === "new" ? null : accountId;
 		await accountStore.saveAccount(formData, targetId);
-		if (targetId) {
-			router.push(`/account/${targetId}`);
+		
+		if (!isEditMode.value) {
+			router.replace("/account");
 		} else {
-			router.push(`/account`);
+			goBack();
 		}
 	} catch (error) {
 		console.error("저장 실패:", error);
@@ -87,7 +119,7 @@ const setType = (type) => {
 const onPriceInput = (e) => {
 	const cleanValue = e.target.value.replace(/[^0-9]/g, "");
 	e.target.value = cleanValue;
-	formData.amount = cleanValue ? Number(cleanValue) : 0;
+	formData.amount = cleanValue ? Number(cleanValue) : "";
 };
 
 onMounted(loadData);
@@ -95,10 +127,7 @@ onMounted(loadData);
 
 <template>
 	<div class="page-container">
-		<AccountHeader
-			:title="formData.type === 'in' ? '수입' : '지출'"
-			@back="router.push(`/account/${formData.id}`)"
-		/>
+		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="goBack" />
 
 		<div class="type-tap-group">
 			<div class="tabs">
@@ -138,6 +167,7 @@ onMounted(loadData);
 						:value="formData.amount"
 						@input="onPriceInput"
 						class="input-field amount-input"
+						placeholder="0"
 					/>
 					<span class="unit">원</span>
 				</div>
@@ -172,6 +202,25 @@ onMounted(loadData);
 			@select="selectCategory"
 			@close="closeCategory"
 		></CategorySelect>
+
+		<!-- Toast Message -->
+		<Teleport to="body">
+			<Transition
+				enter-active-class="transition duration-300 ease-out transform pointer-events-none"
+				enter-from-class="-translate-y-4 opacity-0"
+				enter-to-class="translate-y-0 opacity-100"
+				leave-active-class="transition duration-200 ease-in transform pointer-events-none"
+				leave-from-class="translate-y-0 opacity-100"
+				leave-to-class="-translate-y-4 opacity-0"
+			>
+				<div
+					v-if="showToast"
+					class="fixed top-[40px] left-1/2 -translate-x-1/2 z-[200] px-[24px] py-[14px] bg-gray-900 text-white text-[16px] font-semibold rounded-[12px] shadow-lg whitespace-nowrap"
+				>
+					{{ toastMessage }}
+				</div>
+			</Transition>
+		</Teleport>
 	</div>
 </template>
 
