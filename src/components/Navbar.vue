@@ -6,8 +6,8 @@
 			v-for="tab in tabs"
 			:key="tab.name"
 			:to="tab.path"
-			class="flex flex-col items-center justify-center gap-1 w-16 transition-colors duration-200"
-			:class="[isActive(tab.path) ? 'text-primary' : 'text-white']"
+			class="flex flex-col items-center justify-center gap-1 w-16 transition-colors duration-200 !no-underline"
+			:class="[isActive(tab.path) ? '!text-primary' : '!text-white']"
 		>
 			<component :is="tab.icon" class="size-6" :stroke-width="2.5" />
 			<span class="text-[0.65rem] font-medium tracking-tight">{{ tab.label }}</span>
