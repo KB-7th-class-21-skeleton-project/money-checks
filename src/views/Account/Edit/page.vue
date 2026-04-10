@@ -39,7 +39,7 @@ const formData = reactive({
 	isPublic: true, //공개여부 디폴트 공개
 });
 
-const isEditMode = computed(() => !!accountId);
+const isEditMode = computed(() => !!accountId && accountId !== "new");
 
 const loadData = async () => {
 	if (isEditMode.value) {
@@ -57,8 +57,13 @@ const loadData = async () => {
 const handleSubmit = async () => {
 	try {
 		//store의 save 액션
-		await accountStore.saveAccount(formData, accountId);
-		router.push(`/account/${accountId}`);
+		const targetId = accountId === "new" ? null : accountId;
+		await accountStore.saveAccount(formData, targetId);
+		if (targetId) {
+			router.push(`/account/${targetId}`);
+		} else {
+			router.push(`/account`);
+		}
 	} catch (error) {
 		console.error("저장 실패:", error);
 	}
