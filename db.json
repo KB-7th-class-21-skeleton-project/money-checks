@@ -1,24 +1,74 @@
 {
   "me": {
-    "id": 1,
-    "name": "김국민",
+    "id": "1",
+    "name": "안유진짱",
     "email": "kb@example.com",
     "profileUrl": "/images/profiles/me.png",
     "friendIds": [
-      "2",
-      "3"
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
     ]
   },
   "users": [
     {
       "id": "2",
       "name": "박토스",
+      "email": "toss@example.com",
       "profileUrl": "/images/profiles/p2.png"
     },
     {
       "id": "3",
       "name": "이신한",
+      "email": "shinhan@example.com",
       "profileUrl": "/images/profiles/p3.png"
+    },
+    {
+      "id": "4",
+      "name": "김우리",
+      "email": "woori@example.com",
+      "profileUrl": "/images/profiles/p4.png"
+    },
+    {
+      "id": "5",
+      "name": "최하나",
+      "email": "hana@example.com",
+      "profileUrl": "/images/profiles/p5.png"
+    },
+    {
+      "id": "6",
+      "name": "정농협",
+      "email": "nh@example.com",
+      "profileUrl": "/images/profiles/p6.png"
+    },
+    {
+      "id": "7",
+      "name": "강카카오",
+      "email": "kakao@example.com",
+      "profileUrl": "/images/profiles/p7.png"
+    },
+    {
+      "id": "8",
+      "name": "윤케이뱅크",
+      "email": "kbank@example.com",
+      "profileUrl": "/images/profiles/p8.png"
+    },
+    {
+      "id": "9",
+      "name": "임새마을",
+      "email": "kfcc@example.com",
+      "profileUrl": "/images/profiles/p9.png"
+    },
+    {
+      "id": "10",
+      "name": "조우체국",
+      "email": "post@example.com",
+      "profileUrl": "/images/profiles/p10.png"
     }
   ],
   "account": [
