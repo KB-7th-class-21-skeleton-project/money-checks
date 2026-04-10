@@ -95,81 +95,86 @@
 		<div class="section-wrap">
 			<p class="section-title">카테고리별 지출</p>
 			<div class="donut-card">
-				<svg
-					:viewBox="`0 0 ${CHART_SIZE} ${CHART_SIZE}`"
-					:width="CHART_SIZE"
-					:height="CHART_SIZE"
-					class="donut-svg"
-				>
-					<defs>
-						<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-							<feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.12)" />
-						</filter>
-					</defs>
-
-					<g
-						v-for="(seg, i) in donutSegments"
-						:key="i"
-						:transform="
-							hoveredIndex === i
-								? `translate(${CHART_CX},${CHART_CY}) scale(1.08) translate(${-CHART_CX},${-CHART_CY}) translate(${Math.cos(seg.midRad) * 6},${Math.sin(seg.midRad) * 6})`
-								: ''
-						"
-						style="cursor: pointer; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)"
-						@click="hoveredIndex = hoveredIndex === i ? null : i"
+				<template v-if="chartCategories.length === 0">
+					<p class="empty-chart">이번 달 지출 내역이 없어요</p>
+				</template>
+				<template v-else>
+					<svg
+						:viewBox="`0 0 ${CHART_SIZE} ${CHART_SIZE}`"
+						:width="CHART_SIZE"
+						:height="CHART_SIZE"
+						class="donut-svg"
 					>
-						<path :d="seg.innerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
-						<path :d="seg.outerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
-					</g>
+						<defs>
+							<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+								<feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.12)" />
+							</filter>
+						</defs>
 
-					<circle
-						:cx="CHART_CX"
-						:cy="CHART_CY"
-						:r="R_INNER"
-						fill="white"
-						style="pointer-events: none"
-					/>
-
-					<g
-						v-if="hoveredIndex !== null && donutSegments[hoveredIndex]"
-						:style="{
-							transform: `translate(${donutSegments[hoveredIndex].labelX}px, ${donutSegments[hoveredIndex].labelY}px)`,
-							pointerEvents: 'none',
-						}"
-					>
-						<circle
-							cx="0"
-							cy="0"
-							r="30"
-							fill="white"
-							:stroke="donutSegments[hoveredIndex].color"
-							stroke-width="1.5"
-							filter="url(#shadow)"
-						/>
-						<text x="0" y="-8" text-anchor="middle" font-size="9" font-weight="600" fill="#444">
-							{{ donutSegments[hoveredIndex].name }}
-						</text>
-						<text
-							x="0"
-							y="10"
-							text-anchor="middle"
-							font-size="12"
-							font-weight="700"
-							:fill="donutSegments[hoveredIndex].color"
+						<g
+							v-for="(seg, i) in donutSegments"
+							:key="i"
+							:transform="
+								hoveredIndex === i
+									? `translate(${CHART_CX},${CHART_CY}) scale(1.08) translate(${-CHART_CX},${-CHART_CY}) translate(${Math.cos(seg.midRad) * 6},${Math.sin(seg.midRad) * 6})`
+									: ''
+							"
+							style="cursor: pointer; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)"
+							@click="hoveredIndex = hoveredIndex === i ? null : i"
 						>
-							{{ donutSegments[hoveredIndex].percent }}%
-						</text>
-					</g>
-				</svg>
+							<path :d="seg.innerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
+							<path :d="seg.outerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
+						</g>
 
-				<!-- 범례 -->
-				<div class="legend">
-					<div class="legend-item" v-for="(cat, i) in chartCategories" :key="i">
-						<span class="legend-dot" :style="{ background: cat.color }"></span>
-						<span class="legend-name">{{ cat.name }}</span>
-						<span class="legend-amount">{{ formatWon(cat.amount) }}</span>
+						<circle
+							:cx="CHART_CX"
+							:cy="CHART_CY"
+							:r="R_INNER"
+							fill="white"
+							style="pointer-events: none"
+						/>
+
+						<g
+							v-if="hoveredIndex !== null && donutSegments[hoveredIndex]"
+							:style="{
+								transform: `translate(${donutSegments[hoveredIndex].labelX}px, ${donutSegments[hoveredIndex].labelY}px)`,
+								pointerEvents: 'none',
+							}"
+						>
+							<circle
+								cx="0"
+								cy="0"
+								r="30"
+								fill="white"
+								:stroke="donutSegments[hoveredIndex].color"
+								stroke-width="1.5"
+								filter="url(#shadow)"
+							/>
+							<text x="0" y="-8" text-anchor="middle" font-size="9" font-weight="600" fill="#444">
+								{{ donutSegments[hoveredIndex].name }}
+							</text>
+							<text
+								x="0"
+								y="10"
+								text-anchor="middle"
+								font-size="12"
+								font-weight="700"
+								:fill="donutSegments[hoveredIndex].color"
+							>
+								{{ donutSegments[hoveredIndex].percent }}%
+							</text>
+						</g>
+					</svg>
+
+					<!-- 범례 -->
+					<div class="legend">
+						<div class="legend-item" v-for="(cat, i) in chartCategories" :key="i">
+							<span class="legend-dot" :style="{ background: cat.color }"></span>
+							<span class="legend-name">{{ cat.name }}</span>
+							<span class="legend-amount">{{ formatWon(cat.amount) }}</span>
+						</div>
 					</div>
-				</div>
+				</template>
 			</div>
 		</div>
 	</main>
@@ -421,7 +426,11 @@ const saveBudget = async () => {
 		if (budget.id) {
 			await patchBudget(budget.id, { amount });
 		} else {
-			const existing = await getBudget({ userId, year: currentYear.value, month: currentMonth.value });
+			const existing = await getBudget({
+				userId,
+				year: currentYear.value,
+				month: currentMonth.value,
+			});
 			if (existing.length > 0) {
 				await patchBudget(existing[0].id, { amount });
 			} else {
@@ -808,6 +817,13 @@ const dailyExpense = computed(() => {
 }
 
 /* 도넛 카드 */
+.empty-chart {
+	font-size: 13px;
+	color: #aaa;
+	text-align: center;
+	padding: 32px 0;
+}
+
 .donut-card {
 	display: flex;
 	flex-direction: column;
