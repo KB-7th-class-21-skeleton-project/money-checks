@@ -39,7 +39,7 @@ const toggle = () => {
 	transition: background-color 0.2s;
 }
 .toggle-bg.active {
-	background-color: #ffcc00; /* 노란색 배경 */
+	background-color: #ffd100;
 }
 .toggle-handle {
 	width: 18px;
