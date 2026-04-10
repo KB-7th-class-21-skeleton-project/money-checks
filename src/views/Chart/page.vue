@@ -379,7 +379,7 @@ const donutSegments = computed(() => {
 });
 
 // ── 월 네비게이션 ──────────────────────────────────────
-const currentMonthLabel = computed(() => `${currentMonth.value}월`);
+const currentMonthLabel = computed(() => `${currentYear.value}년 ${currentMonth.value}월`);
 
 const prevMonth = () => {
 	if (currentMonth.value === 1) {
@@ -496,7 +496,7 @@ const dailyExpense = computed(() => {
 	font-size: 16px;
 	font-weight: 600;
 	color: black;
-	min-width: 40px;
+	min-width: 120px;
 	text-align: center;
 }
 

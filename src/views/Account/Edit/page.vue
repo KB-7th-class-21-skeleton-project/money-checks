@@ -2,7 +2,6 @@
 import { useRoute, useRouter } from "vue-router";
 import { reactive, onMounted, computed, ref } from "vue";
 import { useAccountStore } from "@/stores/account";
-import axios from "axios";
 import CategorySelect from "./components/CategorySelect.vue";
 import AccountHeader from "../Detail/AccountHeader.vue";
 import ToggleSwitch from "./components/ToggleSwitch.vue";
@@ -31,16 +30,16 @@ const getTime = () => {
 const formData = reactive({
 	date: getToday(),
 	time: getTime(),
-	amount: 0,
+	amount: "",
 	category: "",
 	content: "",
 	memo: "",
 	type: "out", //디폴트 지출
-	userId: 1,
 	isPublic: true, //공개여부 디폴트 공개
+	userId: "1", // 로그인된 유저(본인)
 });
 
-const isEditMode = computed(() => !!accountId);
+const isEditMode = computed(() => !!accountId && accountId !== "new");
 
 const loadData = async () => {
 	if (isEditMode.value) {
@@ -55,11 +54,48 @@ const loadData = async () => {
 	}
 };
 
+const goBack = () => {
+	if (window.history.state.back) {
+		router.back();
+	} else {
+		router.replace(`/account/${accountId}`);
+	}
+};
+
+const toastMessage = ref("");
+const showToast = ref(false);
+
+const displayToast = (msg) => {
+	toastMessage.value = msg;
+	showToast.value = true;
+	setTimeout(() => {
+		showToast.value = false;
+	}, 2000);
+};
+
 const handleSubmit = async () => {
+	if (!formData.amount || formData.amount === 0) {
+		displayToast("금액을 입력해 주세요.");
+		return;
+	}
+	if (!formData.category || formData.category === "0" || formData.category === "") {
+		displayToast("카테고리를 선택해 주세요.");
+		return;
+	}
+	if (!formData.content || formData.content.trim() === "") {
+		displayToast("내용을 입력해 주세요.");
+		return;
+	}
+
 	try {
-		//store의 save 액션
-		await accountStore.saveAccount(formData, accountId);
-		router.push(`/account/${accountId}`);
+		const targetId = accountId === "new" ? null : accountId;
+		await accountStore.saveAccount(formData, targetId);
+		
+		if (!isEditMode.value) {
+			router.replace("/account");
+		} else {
+			goBack();
+		}
 	} catch (error) {
 		console.error("저장 실패:", error);
 	}
@@ -80,12 +116,18 @@ const setType = (type) => {
 	formData.type = type;
 };
 
+const onPriceInput = (e) => {
+	const cleanValue = e.target.value.replace(/[^0-9]/g, "");
+	e.target.value = cleanValue;
+	formData.amount = cleanValue ? Number(cleanValue) : "";
+};
+
 onMounted(loadData);
 </script>
 
 <template>
 	<div class="page-container">
-		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="router.back()" />
+		<AccountHeader :title="formData.type === 'in' ? '수입' : '지출'" @back="goBack" />
 
 		<div class="type-tap-group">
 			<div class="tabs">
@@ -119,7 +161,14 @@ onMounted(loadData);
 			<div class="input-group">
 				<label>금액</label>
 				<div class="amount-wrapper">
-					<input type="number" v-model.number="formData.amount" class="input-field amount-input" />
+					<input
+						type="text"
+						inputmode="numeric"
+						:value="formData.amount"
+						@input="onPriceInput"
+						class="input-field amount-input"
+						placeholder="0"
+					/>
 					<span class="unit">원</span>
 				</div>
 			</div>
@@ -153,6 +202,25 @@ onMounted(loadData);
 			@select="selectCategory"
 			@close="closeCategory"
 		></CategorySelect>
+
+		<!-- Toast Message -->
+		<Teleport to="body">
+			<Transition
+				enter-active-class="transition duration-300 ease-out transform pointer-events-none"
+				enter-from-class="-translate-y-4 opacity-0"
+				enter-to-class="translate-y-0 opacity-100"
+				leave-active-class="transition duration-200 ease-in transform pointer-events-none"
+				leave-from-class="translate-y-0 opacity-100"
+				leave-to-class="-translate-y-4 opacity-0"
+			>
+				<div
+					v-if="showToast"
+					class="fixed top-[40px] left-1/2 -translate-x-1/2 z-[200] px-[24px] py-[14px] bg-gray-900 text-white text-[16px] font-semibold rounded-[12px] shadow-lg whitespace-nowrap"
+				>
+					{{ toastMessage }}
+				</div>
+			</Transition>
+		</Teleport>
 	</div>
 </template>
 
