@@ -83,3 +83,12 @@ export const deleteReaction = (id) => api.delete(`/reactions/${id}`);
 // 예산 조회
 export const getBudget = ({ userId, year, month }) =>
 	api.get("/budget", { params: { userId, year, month } });
+
+// 예산 생성
+export const postBudget = (data) => api.post("/budget", data);
+
+// 예산 수정
+export const patchBudget = (id, data) => api.patch(`/budget/${id}`, data);
+
+// 예산 삭제
+export const deleteBudget = (id) => api.delete(`/budget/${id}`);

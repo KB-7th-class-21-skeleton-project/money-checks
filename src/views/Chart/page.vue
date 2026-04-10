@@ -211,8 +211,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from "vue";
 import { Wallet, ChevronLeft, ChevronRight, Pencil, Settings2 } from "lucide-vue-next";
-import { api } from "@/api/instance.js";
-import { getMe, getAccounts, getBudget } from "@/api/account.js";
+import { getMe, getAccounts, getBudget, postBudget, patchBudget, deleteBudget } from "@/api/account.js";
 
 // ── 상태 ──────────────────────────────────────────────
 const currentMonth = ref(new Date().getMonth() + 1);
@@ -381,7 +380,7 @@ const resetBudget = () => {
 
 const confirmReset = async () => {
 	if (budget.id) {
-		await api.delete(`/budget/${budget.id}`);
+		await deleteBudget(budget.id);
 	}
 	showResetConfirm.value = false;
 	showBudgetSheet.value = false;
@@ -393,9 +392,9 @@ const saveBudget = async () => {
 	if (!amount || amount <= 0) return;
 	const userId = me.value.id;
 	if (budget.id) {
-		await api.patch(`/budget/${budget.id}`, { amount });
+		await patchBudget(budget.id, { amount });
 	} else {
-		await api.post("/budget", {
+		await postBudget({
 			userId,
 			year: currentYear.value,
 			month: currentMonth.value,
