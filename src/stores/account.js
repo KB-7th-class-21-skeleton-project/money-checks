@@ -6,6 +6,7 @@ export const useAccountStore = defineStore("account", {
 		currentAccount: null,
 		loading: false,
 		error: null,
+		id: "",
 	}),
 	actions: {
 		// 데이터 저장
