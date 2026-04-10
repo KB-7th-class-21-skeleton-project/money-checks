@@ -79,3 +79,7 @@ export const createReaction = (data) => api.post("/reactions", data);
 
 // 리액션 삭제
 export const deleteReaction = (id) => api.delete(`/reactions/${id}`);
+
+// 예산 조회
+export const getBudget = ({ userId, year, month }) =>
+	api.get("/budget", { params: { userId, year, month } });
