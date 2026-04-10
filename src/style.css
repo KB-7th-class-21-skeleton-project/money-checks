@@ -206,3 +206,17 @@
 		@apply bg-muted/30 text-foreground font-sans;
 	}
 }
+
+p {
+	padding: 0;
+	margin: 0;
+}
+
+hr {
+	margin: 0;
+}
+
+h3 {
+	font-size: 14px;
+	margin: 0;
+}

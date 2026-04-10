@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/vue-query";
-import { getUsers, getUser } from "@/api/user.js";
+import { getUsers, getUser, getMe } from "@/api/user.js";
 
 /**
  * 전체 유저 목록을 가져오는 Query Option
@@ -21,5 +21,16 @@ export const getUserOption = (userId) => {
 	return queryOptions({
 		queryKey: ["user", userId],
 		queryFn: () => getUser(userId),
+	});
+};
+
+/**
+ * 내 정보를 가져오는 Query Option
+ * @returns {import('@tanstack/vue-query').UseQueryOptions}
+ */
+export const getMeOption = () => {
+	return queryOptions({
+		queryKey: ["me"],
+		queryFn: getMe,
 	});
 };
