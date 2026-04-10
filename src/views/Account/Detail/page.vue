@@ -92,12 +92,33 @@
 	<div v-if="showEmojiPicker" class="overlay" @click="showEmojiPicker = false" />
 
 	<!-- 삭제 확인 모달 -->
-	<ConfirmModal
-		v-if="showDeleteModal"
-		message="정말 삭제하시겠어요?"
-		@confirm="confirmDelete"
-		@cancel="showDeleteModal = false"
-	/>
+	<Teleport to="body">
+		<ConfirmModal
+			v-if="showDeleteModal"
+			message="정말 삭제하시겠어요?"
+			@confirm="confirmDelete"
+			@cancel="showDeleteModal = false"
+		/>
+	</Teleport>
+
+	<!-- Toast Message -->
+	<Teleport to="body">
+		<Transition
+			enter-active-class="transition duration-300 ease-out transform pointer-events-none"
+			enter-from-class="-translate-y-4 opacity-0"
+			enter-to-class="translate-y-0 opacity-100"
+			leave-active-class="transition duration-200 ease-in transform pointer-events-none"
+			leave-from-class="translate-y-0 opacity-100"
+			leave-to-class="-translate-y-4 opacity-0"
+		>
+			<div
+				v-if="showToast"
+				class="fixed top-[40px] left-1/2 -translate-x-1/2 z-[200] px-[24px] py-[14px] bg-gray-900 text-white text-[16px] font-semibold rounded-[12px] shadow-lg whitespace-nowrap"
+			>
+				{{ toastMessage }}
+			</div>
+		</Transition>
+	</Teleport>
 </template>
 
 <script setup>
@@ -136,6 +157,16 @@ const newComment = ref("");
 const showEmojiPicker = ref(false);
 const showDeleteModal = ref(false);
 const isSubmittingComment = ref(false);
+
+const toastMessage = ref("");
+const showToast = ref(false);
+const displayToast = (msg) => {
+	toastMessage.value = msg;
+	showToast.value = true;
+	setTimeout(() => {
+		showToast.value = false;
+	}, 2000);
+};
 
 const TAB_LABELS = { in: "수입", out: "지출" };
 const EMOJI_OPTIONS = ["👍", "👎", "☺️", "😮", "😢"];
@@ -282,11 +313,15 @@ async function confirmDelete() {
 	try {
 		await deleteAccount(accountId);
 		showDeleteModal.value = false;
-		alert("삭제되었습니다.");
-		router.replace("/account");
+		displayToast("삭제되었습니다.");
+		// 토스트 메시지가 보이도록 잠시 대기 후 이동
+		setTimeout(() => {
+			router.replace("/account");
+		}, 600);
 	} catch (err) {
 		console.error("삭제 실패:", err);
-		alert("삭제하는 중 오류가 발생했습니다.");
+		showDeleteModal.value = false;
+		displayToast("삭제하는 중 오류가 발생했습니다.");
 	}
 }
 

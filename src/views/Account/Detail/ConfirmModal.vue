@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-backdrop" @click.self="emit('cancel')">
-		<div class="modal">
+		<div class="confirm-modal-box">
 			<p class="modal-message">{{ message }}</p>
 			<div class="modal-actions">
 				<button class="btn-cancel" @click="emit('cancel')">취소</button>
@@ -30,7 +30,7 @@ const emit = defineEmits(["confirm", "cancel"]);
 	align-items: center;
 	justify-content: center;
 }
-.modal {
+.confirm-modal-box {
 	background: #fff;
 	border-radius: 16px;
 	padding: 28px 24px 20px;
