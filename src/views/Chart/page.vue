@@ -57,32 +57,37 @@
 						<p class="budget-status-text">
 							<template v-if="budget.remaining >= 0">
 								예산이<br />
-								<span class="budget-status-amount">{{ formatWon(budget.remaining) }}</span> 남았어요
+								<span class="budget-status-amount">{{ formatWon(budget.remaining) }}</span
+								><br />
+								남았어요
 							</template>
 							<template v-else>
 								예산보다<br />
-								<span class="budget-status-amount exceeded">{{
-									formatWon(-budget.remaining)
-								}}</span>
+								<span class="budget-status-amount exceeded">{{ formatWon(-budget.remaining) }}</span
+								><br />
 								더 썼어요
 							</template>
 						</p>
 						<div class="budget-detail-list">
-							<div v-if="budget.remaining >= 0" class="budget-detail-row">
+							<div class="budget-detail-row">
 								<span class="budget-detail-label">하루 권장 예산</span>
-								<span class="budget-detail-value">{{ formatWon(dailyBudget) }}</span>
+								<span class="budget-detail-value">{{
+									budget.remaining >= 0 ? formatWon(dailyBudget) : "0원"
+								}}</span>
 							</div>
 							<div class="budget-detail-row">
 								<span class="budget-detail-label">하루 평균 지출</span>
 								<span class="budget-detail-value">{{ formatWon(dailyExpense) }}</span>
 							</div>
-							<div class="budget-detail-row">
-								<span class="budget-detail-label">총 예산</span>
-								<span class="budget-detail-value">{{ formatWon(budget.total) }}</span>
-							</div>
 						</div>
 					</div>
 				</template>
+			</div>
+			<div v-if="budget.total > 0" class="budget-total-row">
+				<BadgeDollarSign :size="12" color="#FFD100" />
+				<span class="budget-total-label">총 예산</span>&nbsp;<span class="budget-total-value">{{
+					formatWon(budget.total)
+				}}</span>
 			</div>
 		</div>
 
@@ -210,8 +215,22 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from "vue";
-import { Wallet, ChevronLeft, ChevronRight, Pencil, Settings2 } from "lucide-vue-next";
-import { getMe, getAccounts, getBudget, postBudget, patchBudget, deleteBudget } from "@/api/account.js";
+import {
+	Wallet,
+	ChevronLeft,
+	ChevronRight,
+	Pencil,
+	Settings2,
+	BadgeDollarSign,
+} from "lucide-vue-next";
+import {
+	getMe,
+	getAccounts,
+	getBudget,
+	postBudget,
+	patchBudget,
+	deleteBudget,
+} from "@/api/account.js";
 
 // ── 상태 ──────────────────────────────────────────────
 const currentMonth = ref(new Date().getMonth() + 1);
@@ -517,7 +536,7 @@ const dailyExpense = computed(() => {
 .budget-setting-btn {
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 3px;
 	background: none;
 	border: none;
 	cursor: pointer;
@@ -532,7 +551,7 @@ const dailyExpense = computed(() => {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	padding: 20px 16px 20px 20px;
+	padding: 14px 20px 14px 20px;
 	background: #f8f9fa;
 	border-radius: 12px;
 }
@@ -582,11 +601,15 @@ const dailyExpense = computed(() => {
 	color: #333;
 	margin: 0;
 	line-height: 1.6;
+	word-break: keep-all;
+	overflow-wrap: break-word;
 }
 .budget-status-amount {
 	font-size: 18px;
 	font-weight: 700;
 	color: #333;
+	display: inline-block;
+	word-break: break-all;
 }
 .budget-status-amount.exceeded {
 	color: #e53e3e;
@@ -594,19 +617,38 @@ const dailyExpense = computed(() => {
 .budget-detail-list {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 8px;
 	align-items: flex-end;
 }
 .budget-detail-row {
 	display: flex;
-	gap: 8px;
-	align-items: center;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 2px;
 }
 .budget-detail-label {
-	font-size: 11px;
+	font-size: 10px;
 	color: #999;
 }
 .budget-detail-value {
+	font-size: 12px;
+	font-weight: 600;
+	color: #444;
+	white-space: nowrap;
+}
+
+.budget-total-row {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 3px;
+	padding-right: 4px;
+}
+.budget-total-label {
+	font-size: 11px;
+	color: #999;
+}
+.budget-total-value {
 	font-size: 12px;
 	font-weight: 600;
 	color: #444;
