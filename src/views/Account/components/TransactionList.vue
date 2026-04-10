@@ -94,39 +94,34 @@ const clickTransactionHandler = (id) => {
 </script>
 
 <template>
-	<div>
+	<div class="flex flex-col gap-[0px] pb-[20px]">
 		<div
-			class="d-flex align-content-center border-bottom py-3 gap-3"
+			class="flex flex-col border-b border-gray-100 py-[12px] gap-[4px]"
 			v-for="group in makeGroups"
 			:key="group.date"
 		>
-			<div class="trasaction-date py-2">{{ formattedDate(group.date) }}</div>
-			<div class="d-flex flex-column w-100">
-				<TransactionItem
-					class="transaction-item-list"
-					v-for="t in group.list"
+			<div class="flex flex-col w-full gap-[0px]">
+				<div
+					v-for="(t, index) in group.list"
 					:key="t.id"
-					:transaction="t"
-					@click.stop="clickTransactionHandler(t.id)"
+					class="flex flex-row items-start w-full"
 				>
-				</TransactionItem>
+					<div class="w-[36px] shrink-0 text-[14px] font-bold text-gray-900 pt-[16px] text-center">
+						<span v-if="index === 0">{{ formattedDate(group.date) }}</span>
+					</div>
+					<div class="flex-1 w-full overflow-hidden">
+						<TransactionItem
+							class="cursor-pointer"
+							:transaction="t"
+							@click.stop="clickTransactionHandler(t.id)"
+						>
+						</TransactionItem>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.transaction-item-list {
-	cursor: pointer;
-	transition: all 0.3s ease;
-	border-radius: 8px;
-}
-.transaction-item-list:hover {
-	background-color: #ffffff;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* 은은한 그림자 */
-}
-.trasaction-date {
-	font-size: 1.2rem;
-	font-weight: 700;
-}
 </style>
