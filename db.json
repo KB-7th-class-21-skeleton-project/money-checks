@@ -74,7 +74,7 @@
   "account": [
     {
       "id": "101",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-04-01",
       "time": "14:30",
       "bankName": "KB국민은행",
@@ -86,79 +86,7 @@
     },
     {
       "id": "102",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "식비",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "103",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "식비",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "104",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "문화/여가",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "105",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "쇼핑",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "106",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "건강",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "103",
-      "userId": 1,
-      "date": "2026-04-07",
-      "time": "18:00",
-      "bankName": "카카오뱅크",
-      "content": "배달의민족",
-      "category": "식비",
-      "amount": 25000,
-      "type": "out",
-      "memo": "저녁은 치킨!"
-    },
-    {
-      "id": "104",
-      "userId": 2,
+      "userId": "2",
       "date": "2026-04-07",
       "time": "18:00",
       "bankName": "카카오뱅크",
@@ -241,7 +169,7 @@
     {
       "id": "1",
       "accountId": "102",
-      "userId": 3,
+      "userId": "3",
       "content": "치킨 맛있겠네요!",
       "createdAt": "2026-04-07T18:05:00Z",
       "parentCommentId": null
@@ -249,7 +177,7 @@
     {
       "id": "2",
       "accountId": "102",
-      "userId": 1,
+      "userId": "1",
       "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
       "createdAt": "2026-04-07T18:05:00Z",
       "parentCommentId": null
@@ -257,13 +185,13 @@
     {
       "id": "3",
       "accountId": "101",
-      "userId": 1,
+      "userId": "1",
       "content": "나도 커피 마시고 싶다",
       "createdAt": "2026-04-01T06:36:05Z",
       "parentCommentId": null
     },
     {
-      "userId": 1,
+      "userId": "1",
       "accountId": "102",
       "content": "응~어쩔티비~저쩔티비~안물티비~안궁티비~뇌절티비~우짤래미~ 저짤래미~ 쿠쿠루삥뽕 지금 화났죠?개킹받죠? 죽이고 싶죠? 어차피 내가 사는곳 모르죠? 응~못 죽이죠?어~또 빡치죠? 아무것도 모르죠? 아무것도 못하죠?그냥 화났죠? 냬~알걨섑니댸 아무도 안물 안궁~물어본 사람?궁금한 사람 응 근데 어쩔티비죠? 약올리죠? 응~ 어쩔 저쩔 안물 안궁",
       "createdAt": "2026-04-09T04:34:54.964Z",
@@ -274,47 +202,47 @@
   "reactions": [
     {
       "id": "1",
-      "userId": 2,
+      "userId": "2",
       "accountId": "102",
       "emoji": "👍"
     },
     {
       "id": "2",
-      "userId": 1,
+      "userId": "1",
       "accountId": "102",
       "emoji": "☺️"
     },
     {
       "id": "3",
-      "userId": 1,
+      "userId": "1",
       "accountId": "101",
       "emoji": "😢"
     },
     {
-      "userId": 1,
+      "userId": "1",
       "accountId": "101",
       "emoji": "👍",
       "id": "TsIgDdWrSbE"
     },
     {
-      "userId": 1,
+      "userId": "1",
       "accountId": "101",
       "emoji": "👎",
       "id": "uN0nPJD6R4c"
     },
     {
-      "userId": 1,
+      "userId": "1",
       "accountId": "102",
       "emoji": "👎",
       "id": "vcQigHoWKFk"
     },
     {
-      "userId": 1,
+      "userId": "1",
       "accountId": "102",
       "emoji": "😮",
       "id": "bw0yaeCkFcI"
     }
   ],
-  "budget": [],
-  "$schema": "./node_modules/json-server/schema.json"
+  "$schema": "./node_modules/json-server/schema.json",
+  "budget": []
 }
