@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { reactive, onMounted, computed, ref } from "vue";
+import { useAccountStore } from "@/stores/account";
 import axios from "axios";
 import CategorySelect from "./components/CategorySelect.vue";
 import AccountHeader from "../Detail/AccountHeader.vue";
@@ -9,6 +10,7 @@ import ToggleSwitch from "./components/ToggleSwitch.vue";
 const route = useRoute();
 const router = useRouter();
 const accountId = route.params.id;
+const accountStore = useAccountStore();
 
 const getToday = () => {
 	const now = new Date();
@@ -41,36 +43,23 @@ const formData = reactive({
 const isEditMode = computed(() => !!accountId);
 
 const loadData = async () => {
-	const url = "http://localhost:3000/account";
 	if (isEditMode.value) {
-		//수정모드
 		try {
-			const response = await axios.get(`${url}/${accountId}`);
-			// 나중에 pinia로 변경?
-			const data = response.data;
+			//store의 fetch 액션
+			const data = await accountStore.fetchAccountById(accountId);
 			Object.assign(formData, data);
 		} catch (error) {
-			console.error("데이터 로그 실패:", error);
+			console.error(error);
 			alert("내역을 불러올 수 없습니다.");
 		}
-	} else {
-		console.log("새로 만들기 모드");
 	}
 };
 
 const handleSubmit = async () => {
 	try {
-		const url = "http://localhost:3000/account";
-		formData.amount = Number(formData.amount);
-
-		if (isEditMode.value) {
-			//수정 모드
-			await axios.put(`${url}/${accountId}`, formData);
-		} else {
-			//생성 모드
-			await axios.post(url, formData);
-		}
-		router.push("/account");
+		//store의 save 액션
+		await accountStore.saveAccount(formData, accountId);
+		router.push(`/account/${accountId}`);
 	} catch (error) {
 		console.error("저장 실패:", error);
 	}
