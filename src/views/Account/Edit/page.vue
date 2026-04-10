@@ -80,6 +80,12 @@ const setType = (type) => {
 	formData.type = type;
 };
 
+const onPriceInput = (e) => {
+	const cleanValue = e.target.value.replace(/[^0-9]/g, "");
+	e.target.value = cleanValue;
+	formData.amount = cleanValue ? Number(cleanValue) : 0;
+};
+
 onMounted(loadData);
 </script>
 
@@ -119,7 +125,13 @@ onMounted(loadData);
 			<div class="input-group">
 				<label>금액</label>
 				<div class="amount-wrapper">
-					<input type="number" v-model.number="formData.amount" class="input-field amount-input" />
+					<input
+						type="text"
+						inputmode="numeric"
+						:value="formData.amount"
+						@input="onPriceInput"
+						class="input-field amount-input"
+					/>
 					<span class="unit">원</span>
 				</div>
 			</div>
