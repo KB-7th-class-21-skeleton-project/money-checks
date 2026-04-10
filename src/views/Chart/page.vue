@@ -113,8 +113,8 @@
 						style="cursor: pointer; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)"
 						@click="hoveredIndex = hoveredIndex === i ? null : i"
 					>
-						<path :d="seg.innerPath" :fill="seg.color" />
-						<path :d="seg.outerPath" :fill="seg.color" />
+						<path :d="seg.innerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
+						<path :d="seg.outerPath" :fill="seg.color" :stroke="seg.color" stroke-width="1" />
 					</g>
 
 					<circle
