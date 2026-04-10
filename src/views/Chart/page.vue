@@ -183,14 +183,18 @@
 			<p class="sheet-title">예산 설정</p>
 			<div class="sheet-input-wrap">
 				<input
-					type="number"
+					type="text"
+					inputmode="numeric"
 					class="sheet-input"
-					v-model.number="budgetInput"
+					:value="budgetInput"
 					placeholder="0"
-					min="1"
-					step="1"
 					autofocus
-					@keydown="(e) => ['-', '+', '.', 'e'].includes(e.key) && e.preventDefault()"
+					@input="
+						(e) => {
+							budgetInput = e.target.value.replace(/[^0-9]/g, '');
+							e.target.value = budgetInput;
+						}
+					"
 				/>
 				<span class="sheet-unit">원</span>
 			</div>
