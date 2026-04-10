@@ -82,7 +82,7 @@
 					class="comment-input"
 					placeholder="댓글을 입력해주세요"
 					enterkeyhint="send"
-					@keydown.enter.prevent="handleSubmitComment"
+					@keyup.enter.prevent="(e) => !e.isComposing && handleSubmitComment()"
 				/>
 			</div>
 		</template>
@@ -135,6 +135,7 @@ const error = ref(null);
 const newComment = ref("");
 const showEmojiPicker = ref(false);
 const showDeleteModal = ref(false);
+const isSubmittingComment = ref(false);
 
 const TAB_LABELS = { in: "수입", out: "지출" };
 const EMOJI_OPTIONS = ["👍", "👎", "☺️", "😮", "😢"];
@@ -257,8 +258,11 @@ async function updateComment(id, content) {
 }
 
 async function handleSubmitComment() {
+	if (isSubmittingComment.value) return;
+	isSubmittingComment.value = true;
 	await submitComment(newComment.value);
 	newComment.value = "";
+	isSubmittingComment.value = false;
 }
 
 function pickEmoji(emoji) {
