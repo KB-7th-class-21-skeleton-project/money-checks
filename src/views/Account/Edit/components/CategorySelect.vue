@@ -30,10 +30,12 @@ import {
 	Coffee,
 	Car,
 	ShoppingBag,
-	Shirt,
 	Ticket,
 	ScanHeart,
-	Home,
+	Wallet,
+	HandCoins,
+	BanknoteArrowDown,
+	Ellipsis,
 	X,
 } from "lucide-vue-next";
 
@@ -44,18 +46,20 @@ const categories = [
 	{ name: "식비", icon: Utensils },
 	{ name: "카페", icon: Coffee },
 	{ name: "교통", icon: Car },
-	{ name: "생활", icon: ShoppingBag },
-	{ name: "패션", icon: Shirt },
-	{ name: "문화", icon: Ticket },
+	{ name: "쇼핑", icon: ShoppingBag },
+	{ name: "문화/여가", icon: Ticket },
 	{ name: "건강", icon: ScanHeart },
-	{ name: "주거", icon: Home },
+	{ name: "급여", icon: Wallet },
+	{ name: "용돈", icon: HandCoins },
+	{ name: "금융수입", icon: BanknoteArrowDown },
+	{ name: "기타", icon: Ellipsis },
 ];
 </script>
 
 <style scoped>
 .grid-layout {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	gap: 12px;
 }
 
