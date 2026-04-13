@@ -17,7 +17,7 @@ import {
 	HandCoins,
 	Wallet,
 	BanknoteArrowDown,
-	ChevronDown
+	ChevronDown,
 } from "lucide-vue-next";
 
 const props = defineProps({
@@ -71,7 +71,7 @@ const onSelectDate = (date) => {
 };
 
 const requestCategory = () => {
-	const url = "http://localhost:3000/categories";
+	const url = `${import.meta.env.VITE_API_BASE_URL}/categories`;
 	return axios.get(url);
 };
 
@@ -83,11 +83,17 @@ onMounted(async () => {
 <template>
 	<div class="py-[8px] bg-transparent">
 		<!-- 전체화면 오버레이: 외부 클릭 시 드롭다운 닫기 -->
-		<div v-if="isDateOpen || isCategoryOpen" @click="closeAll" class="fixed inset-0 z-30 cursor-default"></div>
+		<div
+			v-if="isDateOpen || isCategoryOpen"
+			@click="closeAll"
+			class="fixed inset-0 z-30 cursor-default"
+		></div>
 
 		<div class="flex gap-[8px] items-center relative z-40 flex-wrap">
 			<!-- 필터 라벨 -->
-			<div class="flex items-center gap-[4px] py-[4px] px-[12px] bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-full shrink-0 shadow-sm text-gray-700">
+			<div
+				class="flex items-center gap-[4px] py-[4px] px-[12px] bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-full shrink-0 shadow-sm text-gray-700"
+			>
 				<SlidersHorizontal :size="12" class="text-gray-500" />
 				<span class="text-[12px] font-semibold text-gray-700">필터</span>
 			</div>
@@ -96,18 +102,32 @@ onMounted(async () => {
 
 			<!-- 기간 드롭다운 -->
 			<div class="relative">
-				<button 
-					@click="toggleDate" 
+				<button
+					@click="toggleDate"
 					:class="[
-						isDateOpen ? 'border-primary ring-2 ring-primary/20 text-primary shadow-md' : 'border-gray-200 text-gray-700 shadow-sm hover:border-gray-300 hover:shadow hover:-translate-y-[1px]',
-						'flex items-center gap-[4px] bg-white text-[12px] font-semibold py-[4px] px-[12px] rounded-full transition-all duration-300 ease-out focus:outline-none'
+						isDateOpen
+							? 'border-primary ring-2 ring-primary/20 text-primary shadow-md'
+							: 'border-gray-200 text-gray-700 shadow-sm hover:border-gray-300 hover:shadow hover:-translate-y-[1px]',
+						'flex items-center gap-[4px] bg-white text-[12px] font-semibold py-[4px] px-[12px] rounded-full transition-all duration-300 ease-out focus:outline-none',
 					]"
 					type="button"
 				>
-					<span>{{ selectedDate === "0" ? "전체 기간" : selectedDate === "4" ? "오늘" : selectedDate + "개월" }}</span>
-					<ChevronDown :size="12" :class="[isDateOpen ? 'text-primary rotate-180' : 'text-gray-400', 'transition-transform duration-300']" />
+					<span>{{
+						selectedDate === "0"
+							? "전체 기간"
+							: selectedDate === "4"
+								? "오늘"
+								: selectedDate + "개월"
+					}}</span>
+					<ChevronDown
+						:size="12"
+						:class="[
+							isDateOpen ? 'text-primary rotate-180' : 'text-gray-400',
+							'transition-transform duration-300',
+						]"
+					/>
 				</button>
-				
+
 				<Transition
 					enter-active-class="transition duration-200 ease-out origin-top-left"
 					enter-from-class="transform scale-95 opacity-0"
@@ -116,7 +136,10 @@ onMounted(async () => {
 					leave-from-class="transform scale-100 opacity-100"
 					leave-to-class="transform scale-95 opacity-0"
 				>
-					<div v-if="isDateOpen" class="absolute left-0 top-full mt-[8px] w-max min-w-[140px] bg-white shadow-xl border border-gray-100 rounded-2xl p-[8px] z-50">
+					<div
+						v-if="isDateOpen"
+						class="absolute left-0 top-full mt-[8px] w-max min-w-[140px] bg-white shadow-xl border border-gray-100 rounded-2xl p-[8px] z-50"
+					>
 						<ul>
 							<li
 								v-for="d in [
@@ -143,16 +166,24 @@ onMounted(async () => {
 
 			<!-- 카테고리 드롭다운 -->
 			<div class="relative">
-				<button 
-					@click="toggleCategory" 
+				<button
+					@click="toggleCategory"
 					:class="[
-						isCategoryOpen ? 'border-primary ring-2 ring-primary/20 text-primary shadow-md' : 'border-gray-200 text-gray-700 shadow-sm hover:border-gray-300 hover:shadow hover:-translate-y-[1px]',
-						'flex items-center gap-[4px] bg-white text-[12px] font-semibold py-[4px] px-[12px] rounded-full transition-all duration-300 ease-out focus:outline-none'
+						isCategoryOpen
+							? 'border-primary ring-2 ring-primary/20 text-primary shadow-md'
+							: 'border-gray-200 text-gray-700 shadow-sm hover:border-gray-300 hover:shadow hover:-translate-y-[1px]',
+						'flex items-center gap-[4px] bg-white text-[12px] font-semibold py-[4px] px-[12px] rounded-full transition-all duration-300 ease-out focus:outline-none',
 					]"
 					type="button"
 				>
 					<span>{{ selectedCategory === "0" ? "카테고리" : selectedCategory }}</span>
-					<ChevronDown :size="12" :class="[isCategoryOpen ? 'text-primary rotate-180' : 'text-gray-400', 'transition-transform duration-300']" />
+					<ChevronDown
+						:size="12"
+						:class="[
+							isCategoryOpen ? 'text-primary rotate-180' : 'text-gray-400',
+							'transition-transform duration-300',
+						]"
+					/>
 				</button>
 
 				<Transition
@@ -163,7 +194,10 @@ onMounted(async () => {
 					leave-from-class="transform scale-100 opacity-100"
 					leave-to-class="transform scale-95 opacity-0"
 				>
-					<div v-if="isCategoryOpen" class="absolute right-0 top-full mt-[8px] w-max min-w-[280px] bg-white shadow-xl border border-gray-100 rounded-2xl p-[8px] z-50">
+					<div
+						v-if="isCategoryOpen"
+						class="absolute right-0 top-full mt-[8px] w-max min-w-[280px] bg-white shadow-xl border border-gray-100 rounded-2xl p-[8px] z-50"
+					>
 						<ul class="grid grid-cols-2 gap-[4px]">
 							<li class="col-span-2 border-b border-gray-100 pb-[4px] mb-[4px]">
 								<button

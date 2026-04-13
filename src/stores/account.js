@@ -11,7 +11,7 @@ export const useAccountStore = defineStore("account", {
 	actions: {
 		// 데이터 저장
 		async saveAccount(formData, accountId = null) {
-			const url = "http://localhost:3000/account";
+			const url = `${import.meta.env.VITE_API_BASE_URL}/account`;
 			const payload = { ...formData, amount: Number(formData.amount) };
 
 			try {
@@ -29,7 +29,7 @@ export const useAccountStore = defineStore("account", {
 		},
 		//단일 데이터 불러오기
 		async fetchAccountById(id) {
-			const url = `http://localhost:3000/account/${id}`;
+			const url = `${import.meta.env.VITE_API_BASE_URL}/account/${id}`;
 			this.loading = true;
 			try {
 				const response = await axios.get(url);
