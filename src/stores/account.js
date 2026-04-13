@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import { api } from "@/api/instance";
 
 export const useAccountStore = defineStore("account", {
 	state: () => ({
@@ -11,16 +11,15 @@ export const useAccountStore = defineStore("account", {
 	actions: {
 		// 데이터 저장
 		async saveAccount(formData, accountId = null) {
-			const url = "http://localhost:3000/account";
 			const payload = { ...formData, amount: Number(formData.amount) };
 
 			try {
 				if (accountId) {
 					//수정 모드
-					await axios.put(`${url}/${accountId}`, payload);
+					await api.put(`/account/${accountId}`, payload);
 				} else {
 					//생성 모드
-					await axios.post(url, payload);
+					await api.post("/account", payload);
 				}
 			} catch (err) {
 				this.error = "저장에 실패했습니다.";
@@ -29,12 +28,11 @@ export const useAccountStore = defineStore("account", {
 		},
 		//단일 데이터 불러오기
 		async fetchAccountById(id) {
-			const url = `http://localhost:3000/account/${id}`;
 			this.loading = true;
 			try {
-				const response = await axios.get(url);
-				this.currentAccount = response.data;
-				return response.data;
+				const responseData = await api.get(`/account/${id}`);
+				this.currentAccount = responseData;
+				return responseData;
 			} catch (err) {
 				this.error = "데이터를 불러오는 데 실패했습니다.";
 				throw err;
