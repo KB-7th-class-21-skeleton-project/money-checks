@@ -60,12 +60,14 @@ const goToCreate = () => {
 			/>
 		</div>
 		<!-- Create Account Button -->
-		<button
-			class="fixed bottom-[72px] right-[16px] w-[56px] h-[56px] !rounded-full !bg-primary flex items-center justify-center shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all z-50 cursor-pointer"
-			@click="goToCreate"
-		>
-			<Plus class="text-white" :size="24" :stroke-width="1.5" />
-		</button>
+		<div class="fixed inset-x-0 bottom-0 mx-auto max-w-[720px] pointer-events-none z-50">
+			<button
+				class="absolute bottom-[72px] right-[16px] w-[56px] h-[56px] !rounded-full !bg-primary flex items-center justify-center shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all pointer-events-auto cursor-pointer"
+				@click="goToCreate"
+			>
+				<Plus class="text-white" :size="24" :stroke-width="1.5" />
+			</button>
+		</div>
 	</div>
 </template>
 

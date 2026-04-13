@@ -75,10 +75,17 @@ const makeGroups = computed(() => {
 	//[{date: , list:}] 로 return
 	return Object.keys(groups)
 		.sort((a, b) => new Date(b) - new Date(a))
-		.map((date) => ({
-			date: date,
-			list: groups[date],
-		}));
+		.map((date) => {
+			const sortedList = groups[date].sort((a, b) => {
+				const timeA = a.time || "00:00";
+				const timeB = b.time || "00:00";
+				return timeB.localeCompare(timeA);
+			});
+			return {
+				date: date,
+				list: sortedList,
+			};
+		});
 });
 
 const formattedDate = (originalDate) => {
